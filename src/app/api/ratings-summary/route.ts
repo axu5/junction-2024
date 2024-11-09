@@ -9,7 +9,8 @@ export async function POST(req: Request) {
     system: `
 Your job is to analyze a company and a job seeker's values and determine whether they are a good fit.
 Your output is shown to the job seeker. Only include the summary. Explain to the user why they would be a good fit
-for the given company. Write your response in plain text. Focus on the shared values. Keep your response within 200 words at maximum.
+for the given company. Write your response in plain text. Focus on the shared values. Keep your response within 140 words at maximum.
+If possible and if applicable, use reviews as references and put emphasis on them. Also, put emphasis on potential cons.
 `,
     prompt: `
 The input follows this type:
