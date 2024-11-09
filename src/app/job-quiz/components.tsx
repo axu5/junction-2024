@@ -86,7 +86,7 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
 
   if (isLoading) {
     return (
-      <div className="h-[80%] w-full justify-around italic">
+      <div className="font-staatliches h-[80%] w-full justify-around text-center text-4xl">
         Preparing results...
       </div>
     );
