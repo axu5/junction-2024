@@ -76,10 +76,10 @@ export default function CompanySummary(props: Props) {
         <h1 className="font-staatliches px-5 py-8 text-3xl font-semibold text-foreground xl:text-5xl">
           {currentAlias}
         </h1>
-        <p>{match} match</p>
+        <p className="text-xl font-semibold">{match} match</p>
         <button
           onClick={onRevealCompany}
-          className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center text-foreground"
+          className="m-4 cursor-pointer justify-center rounded-lg bg-highlight p-3 px-4 text-center font-semibold text-foreground"
           disabled={revealed}
         >
           {revealed ? "Revealed" : "Reveal company"}
