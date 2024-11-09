@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { categories, Categories } from "../job-quiz/page";
 import { WithId } from "mongodb";
 import CompanySummary from "@/app/[results]/company-summary";
+import Link from "next/link";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -96,9 +97,11 @@ export default async function Results({ params }: ResultsParams) {
 
     await client.close();
 
+    const onClickStartOver = () => {};
+
     return (
       <section className="mb-8">
-        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
+        <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
           Top results
         </h1>
         {topDocuments
@@ -115,6 +118,11 @@ export default async function Results({ params }: ResultsParams) {
               ></CompanySummary>
             );
           })}
+        <Link href={"/job-quiz"}>
+          <button className="m-4 cursor-pointer rounded-lg bg-highlight p-3 px-4 text-center font-semibold text-foreground">
+            Start over
+          </button>
+        </Link>
       </section>
     );
   } catch (e) {
