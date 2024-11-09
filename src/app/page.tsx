@@ -1,3 +1,5 @@
+import HustleHiveArrowDown from "@/../public/arrow-down.png";
+import Image from "next/image";
 import Link from "next/link";
 import { Benefit } from "./benefits";
 
@@ -41,10 +43,15 @@ export default function Home() {
       </div>
       <Link
         href="/job-quiz"
-        className="mx-auto flex max-w-lg flex-row justify-center rounded-full bg-highlight px-5 py-5 text-center font-staatliches text-3xl text-white"
+        className="mx-auto my-5 flex max-w-lg flex-row justify-center rounded-full bg-highlight px-5 py-5 text-center font-staatliches text-3xl text-white"
       >
         Get started
       </Link>
+      <Image
+        src={HustleHiveArrowDown}
+        alt="Scroll down for more"
+        className="motion-preset-oscillate absolute right-20 w-16 object-cover object-center"
+      />
     </>
   );
 }
