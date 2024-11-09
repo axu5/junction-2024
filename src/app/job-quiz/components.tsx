@@ -49,7 +49,7 @@ export function QuizComponent({
       });
       setCounter((c) => c + 1);
       setQuestions((qs) => {
-        qs[qIdx] = qs[qs.length - 1];
+        qs[questionIdx] = qs[qs.length - 1];
         qs.pop();
         return qs;
       });
@@ -66,10 +66,8 @@ export function QuizComponent({
 
   if (isLoading) {
     return (
-      <div className="w-full h-[80%] justify-around">
-        Preparing results...
-      </div>
-    )
+      <div className="h-[80%] w-full justify-around">Preparing results...</div>
+    );
   }
 
   return (
