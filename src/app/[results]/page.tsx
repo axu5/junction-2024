@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { categories, Categories } from "../job-quiz/page";
 import RatingsSummary from "@/app/[results]/ratings-summary";
 import { WithId } from "mongodb";
+import ProsConsSummary from "@/app/[results]/pros-cons-summary";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -36,9 +37,9 @@ export default async function Results({ params }: ResultsParams) {
     const dbClient = await client.connect();
     const database = dbClient.db("companies");
     const collection = database.collection("companies");
-    const cursor = collection.find({});
+    const cursor = collection.find({}, { projection: { ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } });
     const allDocuments =
-      (await cursor.toArray()) as unknown as CompanyDocument[];
+      (await cursor.toArray()) as unknown as WithId<CompanyDocument>[];
     const calculateRating = (doc: CompanyDocument) => {
       const rating =
         doc.ratings.reduce(
@@ -71,18 +72,26 @@ export default async function Results({ params }: ResultsParams) {
       .map(value => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topPreference: CompanyDocument = sortedPreferences[0];
-
-    const doc = await collection.findOne<CompanyDocument>(
-      { _id: (topPreference as unknown as WithId<CompanyDocument>)._id },
-      { projection: { _id: 0, ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } }
-    );
+    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 3).map((obj) => {
+      return { ...obj, _id: undefined };
+    });
 
     await client.close();
 
     return (
       <>
-        <RatingsSummary document={doc!} values={topValues}></RatingsSummary>
+        <section>
+          <h1>Top results</h1>
+          {topDocuments.filter((doc) => !!doc).map((doc) => {
+            return <div key={doc.name}>
+              <h1>{doc.name}</h1>
+              <h2>Summary</h2>
+              <RatingsSummary document={doc} values={topValues}></RatingsSummary>
+              <h2>Pros & Cons</h2>
+              <ProsConsSummary document={doc} values={topValues}></ProsConsSummary>
+            </div>
+          })}
+        </section>
         {sortedPreferences.map((preference) => {
           return (
             <div key={preference.name}>
