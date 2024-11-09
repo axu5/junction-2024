@@ -97,7 +97,10 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
       <span className="text-foreground">
         {seenQuestionKeys.length}/{MIN_ANSWERS}
       </span>
-      <h1 className="font-staatliches text-3xl font-semibold text-foreground">
+      <h1
+        key={currentQuestionKey}
+        className="motion-preset-pop font-staatliches text-3xl font-semibold text-foreground"
+      >
         {currentQuestionKey}
       </h1>
       <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
