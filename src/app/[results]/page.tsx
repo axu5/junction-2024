@@ -97,13 +97,26 @@ export default async function Results({ params }: ResultsParams) {
 
     await client.close();
 
-    const onClickStartOver = () => {};
-
     return (
       <section className="mb-8">
         <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
           Top results
         </h1>
+        <p className="py-6">
+          Information is retrieved from{" "}
+          <span className="text-highlight">
+            <Link href="https://glassdoor.com" target="_blank">
+              Glassdoor
+            </Link>
+          </span>{" "}
+          and{" "}
+          <span className="text-highlight">
+            <Link href="https://coresignal.com" target="_blank">
+              Coresignal
+            </Link>
+          </span>
+          .
+        </p>
         {topDocuments
           .filter((doc) => !!doc)
           .map((doc, i) => {
