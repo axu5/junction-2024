@@ -75,19 +75,6 @@ export default function Home() {
         <h2 className="font-staatliches text-2xl text-foreground">
           Train it by answering a few questions!
         </h2>
-        <div className="grid grid-cols-2 grid-rows-2 gap-x-[2px]">
-          <HexagonSharp className="col-span-2 flex self-center justify-self-center" />
-          <HexagonSharp
-            className="motion-preset-blink -translate-y-4 motion-duration-2000 motion-delay-1000"
-            fill="var(--highlight)"
-            fillOpacity={1}
-          />
-          <HexagonSharp
-            className="motion-preset-blink -translate-y-4 motion-duration-2000"
-            fill="var(--highlight)"
-            fillOpacity={1}
-          />
-        </div>
       </section>
     </>
   );
