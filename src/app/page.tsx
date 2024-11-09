@@ -8,21 +8,21 @@ export default function Home() {
   return (
     <>
       <section className="h-[100vh]">
-      <div className="flex flex-col xl:flex-row">
-        <div className="flex flex-col">
-          <div className="flex flex-col gap-y-5 py-20 xl:max-w-[60%]">
-            <h1 className="font-staatliches text-7xl uppercase text-foreground">
-              Ignore the <span className="text-highlight">buzz</span> with AI
-              powered job search
-            </h1>
-            <h2 className="font-staatliches text-3xl uppercase text-foreground">
-              Find a role that lets you{" "}
-              <span className="text-highlight">bee yourself</span> — In a
-              workplace that aligns with what matters to you most
-            </h2>
-            <p>Made with ❤️ in Junction</p>
-          </div>
-          {/* <Link
+        <div className="flex flex-col xl:flex-row">
+          <div className="flex flex-col">
+            <div className="flex flex-col gap-y-5 py-20 xl:max-w-[60%]">
+              <h1 className="font-staatliches text-7xl uppercase text-foreground">
+                Ignore the <span className="text-highlight">buzz</span> with AI
+                powered job search
+              </h1>
+              <h2 className="font-staatliches text-3xl uppercase text-foreground">
+                Find a role that lets you{" "}
+                <span className="text-highlight">bee yourself</span> — In a
+                workplace that aligns with what matters to you most
+              </h2>
+              <p>Made with ❤️ in Junction</p>
+            </div>
+            {/* <Link
           className="bg-primary flex flex-row justify-center rounded-full p-3 text-center text-foreground"
           href="/job-quiz"
         >
@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <Link
           href="/job-quiz"
-          className="absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center font-staatliches text-3xl text-foreground"
+          className="font-staatliches absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center text-3xl text-foreground"
         >
           Get started
         </Link>
@@ -58,11 +58,11 @@ export default function Home() {
       </section>
 
       <section className="flex h-[75vh] flex-col items-center justify-center gap-y-10">
-        <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
+        <h2 className="bg-secondary font-staatliches rounded-xl p-12 text-2xl text-foreground">
           Aligning your career with your values has a direct impact on your
           overall satisfaction, motivation, and well-being.
         </h2>
-        <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
+        <h2 className="bg-secondary font-staatliches rounded-xl p-12 text-2xl text-foreground">
           Roles that respect work-life balance support mental and physical
           health, preventing burnout and helping you stay present in all areas
           of life.
