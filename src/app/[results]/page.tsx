@@ -1,18 +1,23 @@
 import { client } from "@/db";
 import { notFound } from "next/navigation";
 import { categories, Categories } from "../job-quiz/page";
+import RatingsSummary from "@/app/[results]/ratings-summary";
+import { WithId } from "mongodb";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
 };
 
-type CompanyDocument = {
+export type CompanyDocument = {
   name: string;
   ratings: { category: Categories; rating: number }[];
   positiveBusinessOutlookRate: number;
   ceo: { approval: number };
   recommendRate: number;
   rating: number;
+  ratingsEmbedding: number[];
+  descriptionEmbedding: number[];
+  reviewsEmbedding: number[];
 };
 
 export default async function Results({ params }: ResultsParams) {
@@ -34,7 +39,6 @@ export default async function Results({ params }: ResultsParams) {
     const cursor = collection.find({});
     const allDocuments =
       (await cursor.toArray()) as unknown as CompanyDocument[];
-    await client.close();
     const calculateRating = (doc: CompanyDocument) => {
       const rating =
         doc.ratings.reduce(
@@ -60,8 +64,25 @@ export default async function Results({ params }: ResultsParams) {
     const sortedPreferences = allDocuments.sort((docA, docB) => {
       return calculateRating(docB) - calculateRating(docA);
     });
+    const sortedValues = Object.entries(personalityValues)
+      .sort((a, b) => {
+        return b[1] - a[1];
+      })
+      .map(value => value[0]);
+    const topValues = sortedValues.slice(0, 3);
+
+    const topPreference: CompanyDocument = sortedPreferences[0];
+
+    const doc = await collection.findOne<CompanyDocument>(
+      { _id: (topPreference as unknown as WithId<CompanyDocument>)._id },
+      { projection: { _id: 0, ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } }
+    );
+
+    await client.close();
+
     return (
       <>
+        <RatingsSummary document={doc!} values={topValues}></RatingsSummary>
         {sortedPreferences.map((preference) => {
           return (
             <div key={preference.name}>
@@ -73,7 +94,8 @@ export default async function Results({ params }: ResultsParams) {
         })}
       </>
     );
-  } catch {
+  } catch (e) {
+    console.error(e);
     notFound();
   }
 }
