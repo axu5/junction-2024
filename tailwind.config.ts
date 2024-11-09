@@ -12,10 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: "var(--primary)",
-        highlight: "#F38854",
+        highlight: "var(--highlight)",
+        secondary: "var(--secondary)",
       },
-      font: {
-        staatliches: "var(--staatliches-font-regular)",
+      fontFamily: {
+        staatliches: "var(--font-staatliches-regular)",
       },
     },
   },
