@@ -11,8 +11,14 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "var(--primary)",
+        highlight: "#F38854",
+      },
+      font: {
+        staatliches: "var(--staatliches-font-regular)",
       },
     },
   },
+  // eslint-disable-next-line
   plugins: [require("tailwindcss-motion")],
 } satisfies Config;
