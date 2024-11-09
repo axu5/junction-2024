@@ -47,7 +47,6 @@ export default function ProsConsSummary(props: Props) {
 
       try {
         result = await res.json();
-        console.log(result);
       } catch (e) {
         if (e instanceof Error) {
           setContent(e.message);

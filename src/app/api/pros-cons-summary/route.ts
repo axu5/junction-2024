@@ -18,6 +18,8 @@ Format your output as following this JSON:
 
 The output MUST be valid JSON. It must NOT contain anything other than the JSON. The output must be able to be
 passed to JSON.parse without issues.
+
+Give more importance to pros and cons that relate to the user's values.
 `,
     prompt: `
 The input follows this type:
