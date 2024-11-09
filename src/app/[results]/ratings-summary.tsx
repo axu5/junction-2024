@@ -70,5 +70,10 @@ export default function RatingsSummary(props: Props) {
     };
   }, [document, values, isStreaming]);
 
-  return <p>{ chatResponse }</p>
+  return (
+    <section>
+      <h1>{ document.name }</h1>
+      <p>{ chatResponse }</p>
+    </section>
+  )
 }

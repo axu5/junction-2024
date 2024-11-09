@@ -71,18 +71,20 @@ export default async function Results({ params }: ResultsParams) {
       .map(value => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topPreference: CompanyDocument = sortedPreferences[0];
-
-    const doc = await collection.findOne<CompanyDocument>(
-      { _id: (topPreference as unknown as WithId<CompanyDocument>)._id },
-      { projection: { _id: 0, ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } }
-    );
+    const topDocuments = await Promise.all(sortedPreferences.slice(0, 3).map((doc) => {
+      return collection.findOne<CompanyDocument>(
+        { _id: (doc as unknown as WithId<CompanyDocument>)._id },
+        { projection: { _id: 0, ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } }
+      )
+    }));
 
     await client.close();
 
     return (
       <>
-        <RatingsSummary document={doc!} values={topValues}></RatingsSummary>
+        {topDocuments.filter((doc) => !!doc).map((doc) => {
+          return <RatingsSummary key={doc.name} document={doc} values={topValues}></RatingsSummary>;
+        })}
         {sortedPreferences.map((preference) => {
           return (
             <div key={preference.name}>
