@@ -34,6 +34,12 @@ export default function RatingsSummary(props: Props) {
         return;
       }
 
+      if (res.body === null) {
+        setIsStreaming(false);
+        setChatResponse("Invalid response");
+        return;
+      }
+
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
 
