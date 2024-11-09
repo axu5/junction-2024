@@ -61,8 +61,10 @@ export default function CompanySummary(props: Props) {
   );
   const [revealed, setRevealed] = useState(false);
 
-  const onBulletPointsCreated = (bulletPoints: BulletPoints) => {
-    setBulletPoints(bulletPoints);
+  const onBulletPointsCreated = (newPoints: BulletPoints) => {
+    if (bulletPoints === undefined) {
+      setBulletPoints(newPoints);
+    }
   };
 
   const onRevealCompany = () => {
