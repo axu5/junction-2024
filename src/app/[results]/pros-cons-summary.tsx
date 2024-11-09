@@ -86,7 +86,7 @@ export default function ProsConsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, alias, content, generatedWithAlias]);
+  }, [document, values, alias, content, generatedWithAlias, opinions]);
 
   if (content === undefined) {
     return <p className="italic text-foreground">Loading...</p>;
@@ -97,7 +97,7 @@ export default function ProsConsSummary(props: Props) {
   }
 
   return (
-    <section className="flex flex-col gap-10 xl:flex-row">
+    <section className="flex flex-col gap-10 p-4 xl:flex-row">
       <div className="mb-4 xl:w-1/2">
         <h2 className="text-xl font-semibold">Pros</h2>
         <ul className="list-decimal">
@@ -105,6 +105,7 @@ export default function ProsConsSummary(props: Props) {
             <li key={pro}>{pro}</li>
           ))}
         </ul>
+        x
       </div>
       <div className="mb-4 xl:w-1/2">
         <h2 className="text-xl font-semibold">Cons</h2>

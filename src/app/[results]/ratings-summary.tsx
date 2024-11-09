@@ -74,7 +74,7 @@ export default function RatingsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, alias, isStreaming, generatedWithAlias]);
+  }, [document, values, alias, isStreaming, generatedWithAlias, opinions]);
 
   if (chatResponse.length === 0) {
     return <p className="italic text-foreground">Thinking...</p>;

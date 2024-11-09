@@ -56,7 +56,7 @@ export default function CompanySummary(props: Props) {
         </Accordion>
         <Accordion>
           <AccordionSummary expandIcon={<ArrowDownIcon />}>
-            Pros & Cons
+            Pros & Cons for you
           </AccordionSummary>
           <AccordionDetails>
             <ProsConsSummary
