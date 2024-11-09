@@ -22,30 +22,23 @@ export type CompanyDocument = {
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 
-// *Artifical* intelligence :-)
-function mapToMatch(number: number): string {
-  // Clamp the input number to be within the range of 0 to 12
-  const clampedNumber = Math.max(0, Math.min(13, number));
-
-  // Lerp
-  const percentage = 5 + (clampedNumber / 12) * (99 - 5);
-  return percentage.toFixed(2) + "%";
-}
-
 export default async function Results({ params }: ResultsParams) {
   try {
     const { results } = await params;
-    const resultsObject = JSON.parse(
-      atob(decodeURIComponent(results)),
-    );
+    const resultsObject = JSON.parse(atob(decodeURIComponent(results)));
     const personalityValuesArray = resultsObject.values;
     const opinions = resultsObject.opinions;
     if (categories.length != personalityValuesArray.length) {
       throw undefined; // bro....
     }
+    const min = Math.min(...personalityValuesArray);
+    const max = Math.max(...personalityValuesArray);
     // personal work value -> score
     const personalityValues = Object.fromEntries(
-      categories.map((x, i) => [x, personalityValuesArray[i]]),
+      categories.map((x, i) => [
+        x,
+        (personalityValuesArray[i] - min) / (max - min),
+      ]),
     ) as Record<Categories, number>;
     const dbClient = await client.connect();
     const database = dbClient.db("companies");
@@ -64,24 +57,25 @@ export default async function Results({ params }: ResultsParams) {
       (await cursor.toArray()) as unknown as WithId<CompanyDocument>[];
     const calculateRating = (doc: CompanyDocument) => {
       const rating =
-        doc.ratings.reduce(
+        (doc.ratings.reduce(
           (acc: number, _rating: { category: Categories; rating: number }) => {
             const { category, rating } = _rating;
             if (!(category in personalityValues)) {
               return acc;
             }
-            return acc + personalityValues[category] * rating;
+            return acc + personalityValues[category] * (rating / 5);
           },
           0,
         ) +
-        doc.positiveBusinessOutlookRate *
-          personalityValues[
-            "% of people that have a positive business outlook"
-          ] +
-        doc.ceo.approval * personalityValues["% that approve of CEO"] +
-        doc.recommendRate *
-          personalityValues["% that would recommend to a friend"] +
-        doc.rating;
+          doc.positiveBusinessOutlookRate *
+            personalityValues[
+              "% of people that have a positive business outlook"
+            ] +
+          doc.ceo.approval * personalityValues["% that approve of CEO"] +
+          doc.recommendRate *
+            personalityValues["% that would recommend to a friend"] +
+          doc.rating / 5) /
+        (doc.ratings.length + 4);
       return rating;
     };
     const sortedPreferences = allDocuments.sort((docA, docB) => {
@@ -117,7 +111,7 @@ export default async function Results({ params }: ResultsParams) {
                 alias={`Company ${ALPHABET[i]}`}
                 topValues={topValues}
                 opinions={opinions}
-                match={mapToMatch(calculateRating(doc))}
+                match={calculateRating(doc) * 100 + "%"}
               ></CompanySummary>
             );
           })}
