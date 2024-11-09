@@ -2,6 +2,7 @@
 
 import { CompanyDocument } from "@/app/[results]/page";
 import { useEffect, useState } from "react";
+import { readChatStream } from "@/app/chat-client";
 
 interface Props {
   document: CompanyDocument,
@@ -40,27 +41,9 @@ export default function RatingsSummary(props: Props) {
         return;
       }
 
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-
-      let done = false;
-
-      while (!done) {
-        const result = await reader.read();
-
-        const text = decoder.decode(result.value);
-
-        const subchunks = text.split(/\r?\n/g).filter(x => !!x);
-
-        for (const subchunk of subchunks) {
-          const json = JSON.parse(subchunk);
-          const realText = json.choices[0]?.delta?.content || "";
-
-          setChatResponse((t) => t + realText);
-        }
-
-        done = result.done;
-      }
+      await readChatStream(res, (chunk) => {
+        setChatResponse((t) => t + chunk);
+      });
 
       setIsStreaming(false);
     };
@@ -76,10 +59,5 @@ export default function RatingsSummary(props: Props) {
     };
   }, [document, values, isStreaming]);
 
-  return (
-    <section>
-      <h1>{ document.name }</h1>
-      <p>{ chatResponse }</p>
-    </section>
-  )
+  return <p>{ chatResponse }</p>
 }

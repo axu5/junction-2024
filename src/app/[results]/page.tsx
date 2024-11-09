@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { categories, Categories } from "../job-quiz/page";
 import RatingsSummary from "@/app/[results]/ratings-summary";
 import { WithId } from "mongodb";
+import ProsConsSummary from "@/app/[results]/pros-cons-summary";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -79,9 +80,17 @@ export default async function Results({ params }: ResultsParams) {
 
     return (
       <>
-        {topDocuments.filter((doc) => !!doc).map((doc) => {
-          return <RatingsSummary key={doc.name} document={doc} values={topValues}></RatingsSummary>;
-        })}
+        <section>
+          <h1>Top results</h1>
+          {topDocuments.filter((doc) => !!doc).map((doc) => {
+            return <div key={doc.name}>
+              <h1>Summary</h1>
+              <RatingsSummary document={doc} values={topValues}></RatingsSummary>
+              <h1>Pros & Cons</h1>
+              <ProsConsSummary document={doc} values={topValues}></ProsConsSummary>
+            </div>
+          })}
+        </section>
         {sortedPreferences.map((preference) => {
           return (
             <div key={preference.name}>
