@@ -104,14 +104,14 @@ export function QuizComponent({ questions, questionKey }: QuizComponetProps) {
         <div
           onClick={handleClick(-1)}
           key={question.a}
-          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
+          className="bg-secondary-backdrop flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.a}
         </div>
         <div
           onClick={handleClick(1)}
           key={question.b}
-          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
+          className="bg-secondary-backdrop flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.b}
         </div>

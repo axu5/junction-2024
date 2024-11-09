@@ -111,7 +111,7 @@ export default async function Results({ params }: ResultsParams) {
                 alias={`Company ${ALPHABET[i]}`}
                 topValues={topValues}
                 opinions={opinions}
-                match={calculateRating(doc) * 100 + "%"}
+                match={((calculateRating(doc) * 10000) | 0) / 100 + "%"}
               ></CompanySummary>
             );
           })}
