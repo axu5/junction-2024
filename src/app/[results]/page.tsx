@@ -25,7 +25,7 @@ const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 // *Artifical* intelligence :-)
 function mapToMatch(number: number): string {
   // Clamp the input number to be within the range of 0 to 12
-  const clampedNumber = Math.max(0, Math.min(12, number));
+  const clampedNumber = Math.max(0, Math.min(13, number));
 
   // Lerp
   const percentage = 5 + (clampedNumber / 12) * (99 - 5);
@@ -38,9 +38,7 @@ export default async function Results({ params }: ResultsParams) {
     const resultsObject = JSON.parse(
       atob(decodeURIComponent(results)),
     );
-    const personalityValuesArray = JSON.parse(
-      atob(decodeURIComponent(results)),
-    );
+    const personalityValuesArray = resultsObject.values;
     const opinions = resultsObject.opinions;
     if (categories.length != personalityValuesArray.length) {
       throw undefined; // bro....
