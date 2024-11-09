@@ -53,7 +53,7 @@ export function QuizComponent({
         qs.pop();
         return qs;
       });
-      setQuestionIdx((Math.random() * (questions.length - 1)) | 0);
+      setQuestionIdx((Math.random() * (questions.length - 2)) | 0);
     };
   };
 
