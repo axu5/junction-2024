@@ -18,7 +18,8 @@ export function QuizComponent({
   const [counter, setCounter] = useState(0);
   const [questions, setQuestions] = useState(Object.values(_questions));
   const [questionIdx, setQuestionIdx] = useState(qIdx);
-  const [question, setQuestion] = useState(() => questions[questionIdx]);
+  const question = questions[questionIdx];
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [tally, setTally] = useState<{ [K in Categories]: number }>({
     "% of people that have a positive business outlook": 0,
@@ -53,17 +54,23 @@ export function QuizComponent({
         return qs;
       });
       setQuestionIdx((Math.random() * (questions.length - 1)) | 0);
-      setQuestion(() => {
-        return questions[questionIdx];
-      });
     };
   };
 
   useEffect(() => {
     if (counter >= MIN_ANSWERS) {
+      setIsLoading(true);
       router.push(`/${btoa(JSON.stringify(Object.values(tally)))}`);
     }
   }, [router, counter, tally]);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-[80%] justify-around">
+        Preparing results...
+      </div>
+    )
+  }
 
   return (
     <>

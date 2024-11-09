@@ -34,6 +34,7 @@ export default async function Results({ params }: ResultsParams) {
     const cursor = collection.find({});
     const allDocuments =
       (await cursor.toArray()) as unknown as CompanyDocument[];
+    await client.close();
     const calculateRating = (doc: CompanyDocument) => {
       const rating =
         doc.ratings.reduce(
@@ -59,8 +60,6 @@ export default async function Results({ params }: ResultsParams) {
     const sortedPreferences = allDocuments.sort((docA, docB) => {
       return calculateRating(docB) - calculateRating(docA);
     });
-
-    await client.close();
     return (
       <>
         {sortedPreferences.map((preference) => {
