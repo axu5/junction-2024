@@ -3,7 +3,7 @@ import { chat } from "@/app/api/chat-server";
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { alias, values, document } = await req.json();
+  const { alias, values, document, opinions } = await req.json();
 
   return await chat({
     system: `
@@ -17,16 +17,6 @@ Stay objective; avoid using too many adjectives.
     prompt: `
 The input follows this type:
 
-type Category = {
-  category: string;
-  rating: number;
-};
-
-type CEO = {
-  name: string;
-  approvalRate: number;
-};
-
 type Review = {
   rating: number; // 0 - 5
   pros: string;
@@ -37,10 +27,16 @@ type Review = {
 type Input = {
   average: number;
   categories: Category[];
-  reviews: Review[];
+  reviews: {
+    category: string;
+    rating: number;
+  }[];
   recommendRate: number;
   positiveBusinessOutlookRate: number;
-  ceo: CEO;
+  ceo: {
+    name: string;
+    approvalRate: number;
+  };
 };
 
 The average rating and category ratings are a number between 0 and 5, where 5 is best. Recommend rate, positive business outlook rate and CEO approval rate are numbers between 0 and 1, where 1 is best. If any field does not conform to the spec, ignore it.
@@ -48,6 +44,8 @@ User's values (starts at --- and ends at ---):
 
 ---
 ${values.join(", ")}
+
+${opinions.join('\n')}
 ---
 Input (starts at --- and ends at ---):
 ---

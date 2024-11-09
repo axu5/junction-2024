@@ -9,10 +9,11 @@ interface Props {
   doc: CompanyDocument;
   alias: string;
   topValues: string[];
+  opinions: string[];
 }
 
 export default function CompanySummary(props: Props) {
-  const { doc, alias, topValues } = props;
+  const { doc, alias, topValues, opinions } = props;
   const [ currentAlias, setCurrentAlias ] = useState(alias);
   const [ revealed, setRevealed ] = useState(false);
 
@@ -40,6 +41,7 @@ export default function CompanySummary(props: Props) {
             document={doc}
             alias={currentAlias}
             values={topValues}
+            opinions={opinions}
           ></RatingsSummary>
         </div>
         <div>
@@ -50,6 +52,7 @@ export default function CompanySummary(props: Props) {
             document={doc}
             alias={currentAlias}
             values={topValues}
+            opinions={opinions}
           ></ProsConsSummary>
         </div>
       </div>

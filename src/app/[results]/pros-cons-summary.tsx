@@ -4,9 +4,10 @@ import { CompanyDocument } from "@/app/[results]/page";
 import { useEffect, useState } from "react";
 
 interface Props {
-  alias: string,
-  document: CompanyDocument,
-  values: string[]
+  alias: string;
+  document: CompanyDocument;
+  values: string[];
+  opinions: string[];
 }
 
 type Content = {
@@ -15,7 +16,7 @@ type Content = {
 }
 
 export default function ProsConsSummary(props: Props) {
-  const { alias, document, values } = props;
+  const { alias, document, values, opinions } = props;
   const [content, setContent] = useState<Content | string | undefined>(undefined);
   const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
 
@@ -28,7 +29,7 @@ export default function ProsConsSummary(props: Props) {
       try {
         res = await fetch('/api/pros-cons-summary', {
           method: "POST",
-          body: JSON.stringify({ alias, document, values }),
+          body: JSON.stringify({ alias, document, values, opinions }),
           signal: controller.signal
         });
       } catch (e) {

@@ -25,9 +25,11 @@ const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 export default async function Results({ params }: ResultsParams) {
   try {
     const { results } = await params;
-    const personalityValuesArray = JSON.parse(
+    const resultsObject = JSON.parse(
       atob(decodeURIComponent(results)),
     );
+    const personalityValuesArray = resultsObject.values;
+    const opinions = resultsObject.opinions;
     if (categories.length != personalityValuesArray.length) {
       throw undefined;
     }
@@ -85,7 +87,7 @@ export default async function Results({ params }: ResultsParams) {
           {topDocuments
             .filter((doc) => !!doc)
             .map((doc, i) => {
-              return <CompanySummary key={doc.name} doc={doc} alias={`Company ${ALPHABET[i]}`} topValues={topValues}></CompanySummary>
+              return <CompanySummary key={doc.name} doc={doc} alias={`Company ${ALPHABET[i]}`} topValues={topValues} opinions={opinions}></CompanySummary>
             })}
         </section>
     );

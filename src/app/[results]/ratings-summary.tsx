@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import { readChatStream } from "@/app/chat-client";
 
 interface Props {
-  alias: string,
-  document: CompanyDocument,
-  values: string[]
+  alias: string;
+  document: CompanyDocument;
+  values: string[];
+  opinions: string[];
 }
 
 export default function RatingsSummary(props: Props) {
-  const { alias, document, values } = props;
+  const { alias, document, values, opinions } = props;
   const [chatResponse, setChatResponse] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
   const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
@@ -25,7 +26,7 @@ export default function RatingsSummary(props: Props) {
       try {
         res = await fetch('/api/ratings-summary', {
           method: "POST",
-          body: JSON.stringify({ alias, document, values }),
+          body: JSON.stringify({ alias, document, values, opinions }),
           signal: controller.signal
         });
       } catch (e) {
