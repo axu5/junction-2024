@@ -61,7 +61,7 @@ const questions: Questions = {
     },
   },
   "Startup/entrepreneurial culture or traditional corporate culture": {
-    a: "Startup/entrpreneurship culture",
+    a: "Startup/entrepreneurship culture",
     b: "Traditional corporate culture",
     affects: {
       "% that approve of CEO": -0.7,
@@ -162,15 +162,14 @@ const questions: Questions = {
 };
 
 export default async function JobQuiz() {
-  const randQ = (Math.random() * Object.keys(questions).length) | 0;
+  const questionKeys = Object.keys(questions);
+  const randQ = (Math.random() * questionKeys.length) | 0;
 
   return (
-    <div className="flex flex-col gap-y-10 py-20">
+    <div className="flex flex-col gap-y-10">
       <h1 className="font-staatliches text-5xl text-white">Job quiz!</h1>
-      <h2 className="font-staatliches text-2xl text-white">
-        Section 1: This or that
-      </h2>
-      <QuizComponent questions={questions} qIdx={randQ} />
+      <h2 className="text-2xl">Section 1: This or that</h2>
+      <QuizComponent questions={questions} questionKey={questionKeys[randQ]} />
     </div>
   );
 }
