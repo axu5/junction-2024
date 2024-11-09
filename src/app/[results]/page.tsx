@@ -36,7 +36,7 @@ export default async function Results({ params }: ResultsParams) {
     const dbClient = await client.connect();
     const database = dbClient.db("companies");
     const collection = database.collection("companies");
-    const cursor = collection.find({});
+    const cursor = collection.find({}, { projection: { ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } });
     const allDocuments =
       (await cursor.toArray()) as unknown as CompanyDocument[];
     const calculateRating = (doc: CompanyDocument) => {
