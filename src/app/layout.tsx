@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${staatlichesRegular.variable} antialiased`}>
-        <main className="mx-auto max-w-7xl px-20 pt-10">
+        <main className="mx-auto max-w-7xl px-8 xl:px-20 pt-10">
           <nav className="sticky flex w-full flex-row items-center justify-between">
             <Link href="/">
               <Image

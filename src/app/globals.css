@@ -8,6 +8,8 @@
   --highlight: #f38854;
   --primary: #a05c39;
   --secondary: #392518;
+
+  --secondary-backdrop: #392518cc;
 }
 
 body {
