@@ -27,7 +27,7 @@ export default function CompanySummary(props: Props) {
 
   return (
     <div className="pb-8">
-      <div className="flex flex-row justify-between items-center sticky top-4 z-10 bg-secondary-backdrop rounded-xl backdrop-blur-sm">
+      <div className="flex flex-row justify-between items-center bg-secondary-backdrop rounded-xl backdrop-blur-sm">
         <h1 className="font-staatliches px-5 py-8 text-white text-3xl xl:text-5xl font-semibold">{currentAlias}</h1>
         <p>{match} match</p>
         <button
