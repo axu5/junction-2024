@@ -97,8 +97,6 @@ export default async function Results({ params }: ResultsParams) {
 
     await client.close();
 
-    const onClickStartOver = () => {};
-
     return (
       <section className="mb-8">
         <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
