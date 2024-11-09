@@ -1,9 +1,8 @@
 import { client } from "@/db";
 import { notFound } from "next/navigation";
 import { categories, Categories } from "../job-quiz/page";
-import RatingsSummary from "@/app/[results]/ratings-summary";
 import { WithId } from "mongodb";
-import ProsConsSummary from "@/app/[results]/pros-cons-summary";
+import CompanySummary from "@/app/[results]/company-summary";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -86,29 +85,7 @@ export default async function Results({ params }: ResultsParams) {
           {topDocuments
             .filter((doc) => !!doc)
             .map((doc, i) => {
-              return (
-                <div key={doc.name}>
-                  <h1 className="font-semibold text-5xl sticky top-0 bg-background z-10">Company {ALPHABET[i]}</h1>
-                  <div className="flex flex-row gap-x-8">
-                    <div className="w-1/2">
-                      <h2 className="text-2xl sticky top-[3rem] bg-background">Summary</h2>
-                      <RatingsSummary
-                        document={doc}
-                        alias={`Company ${ALPHABET[i]}`}
-                        values={topValues}
-                      ></RatingsSummary>
-                    </div>
-                    <div className="w-1/2">
-                      <h2 className="text-2xl sticky top-[3rem] bg-background">Pros & Cons</h2>
-                      <ProsConsSummary
-                        document={doc}
-                        alias={`Company ${ALPHABET[i]}`}
-                        values={topValues}
-                      ></ProsConsSummary>
-                    </div>
-                  </div>
-                </div>
-              );
+              return <CompanySummary key={doc.name} doc={doc} alias={`Company ${ALPHABET[i]}`} topValues={topValues}></CompanySummary>
             })}
         </section>
     );

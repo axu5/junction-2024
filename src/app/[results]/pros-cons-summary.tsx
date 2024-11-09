@@ -17,6 +17,7 @@ type Content = {
 export default function ProsConsSummary(props: Props) {
   const { alias, document, values } = props;
   const [content, setContent] = useState<Content | string | undefined>(undefined);
+  const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -58,9 +59,17 @@ export default function ProsConsSummary(props: Props) {
       }
 
       setContent(result);
+      setGeneratedWithAlias(alias);
     };
 
-    if (typeof window === "undefined" || content !== undefined) {
+    let shouldRegenerate = content === undefined;
+
+    if (typeof generatedWithAlias === 'string' && alias !== generatedWithAlias) {
+      shouldRegenerate = true;
+      setContent(undefined);
+    }
+
+    if (typeof window === "undefined" || !shouldRegenerate) {
       return;
     }
 
@@ -69,7 +78,7 @@ export default function ProsConsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, content]);
+  }, [document, values, alias, content, generatedWithAlias]);
 
   if (content === undefined) {
     return <p className="italic">Loading...</p>

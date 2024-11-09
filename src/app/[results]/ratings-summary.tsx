@@ -14,6 +14,7 @@ export default function RatingsSummary(props: Props) {
   const { alias, document, values } = props;
   const [chatResponse, setChatResponse] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
+  const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -47,9 +48,18 @@ export default function RatingsSummary(props: Props) {
       });
 
       setIsStreaming(false);
+      setGeneratedWithAlias(alias);
     };
 
-    if (typeof window === "undefined" || !isStreaming) {
+    let shouldRegenerate = isStreaming;
+
+    if (typeof generatedWithAlias === 'string' && alias !== generatedWithAlias) {
+      shouldRegenerate = true;
+      setIsStreaming(true);
+      setChatResponse("");
+    }
+
+    if (typeof window === "undefined" || !shouldRegenerate) {
       return;
     }
 
@@ -58,7 +68,7 @@ export default function RatingsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, alias, isStreaming]);
+  }, [document, values, alias, isStreaming, generatedWithAlias]);
 
   if (chatResponse.length === 0) {
     return <p className="italic">Thinking...</p>

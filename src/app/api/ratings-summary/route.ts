@@ -45,6 +45,7 @@ ${JSON.stringify(document).slice(0, 10_000)}
 ---
 
 Use ${alias} instead of the company name everywhere.
+Turn a rating between 0 and 1 to a percentage (i.e. 0.45 becomes 45%).
         `
   });
 }
