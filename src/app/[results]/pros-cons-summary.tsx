@@ -13,12 +13,16 @@ interface Props {
 type Content = {
   pros: string[];
   cons: string[];
-}
+};
 
 export default function ProsConsSummary(props: Props) {
   const { alias, document, values, opinions } = props;
-  const [content, setContent] = useState<Content | string | undefined>(undefined);
-  const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
+  const [content, setContent] = useState<Content | string | undefined>(
+    undefined,
+  );
+  const [generatedWithAlias, setGeneratedWithAlias] = useState<
+    string | undefined
+  >(undefined);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -27,14 +31,14 @@ export default function ProsConsSummary(props: Props) {
       let res: Response;
 
       try {
-        res = await fetch('/api/pros-cons-summary', {
+        res = await fetch("/api/pros-cons-summary", {
           method: "POST",
           body: JSON.stringify({ alias, document, values, opinions }),
-          signal: controller.signal
+          signal: controller.signal,
         });
       } catch (e) {
         if (e instanceof Error) {
-          if (e.name !== 'AbortError') {
+          if (e.name !== "AbortError") {
             setContent(e.message);
           }
         }
@@ -65,7 +69,10 @@ export default function ProsConsSummary(props: Props) {
 
     let shouldRegenerate = content === undefined;
 
-    if (typeof generatedWithAlias === 'string' && alias !== generatedWithAlias) {
+    if (
+      typeof generatedWithAlias === "string" &&
+      alias !== generatedWithAlias
+    ) {
       shouldRegenerate = true;
       setContent(undefined);
     }
@@ -82,25 +89,25 @@ export default function ProsConsSummary(props: Props) {
   }, [document, values, alias, content, generatedWithAlias, opinions]);
 
   if (content === undefined) {
-    return <p className="italic">Loading...</p>
+    return <p className="italic">Loading...</p>;
   }
 
-  if (typeof content === 'string') {
-    return <p>{content}</p>
+  if (typeof content === "string") {
+    return <p>{content}</p>;
   }
 
   return (
-    <section className="flex flex-col xl:flex-row gap-10 p-4">
-      <div className="xl:w-1/2 mb-4">
-        <h2 className="font-semibold text-xl">Pros</h2>
+    <section className="flex flex-col gap-10 p-4 xl:flex-row">
+      <div className="mb-4 xl:w-1/2">
+        <h2 className="text-xl font-semibold">Pros</h2>
         <ul className="list-decimal">
           {content.pros.map((pro) => (
             <li key={pro}>{pro}</li>
           ))}
-        </ul>x
+        </ul>
       </div>
-      <div className="xl:w-1/2 mb-4">
-        <h2 className="font-semibold text-xl">Cons</h2>
+      <div className="mb-4 xl:w-1/2">
+        <h2 className="text-xl font-semibold">Cons</h2>
         <ul className="list-decimal">
           {content.cons.map((con) => (
             <li key={con}>{con}</li>
