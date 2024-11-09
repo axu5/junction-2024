@@ -1,20 +1,12 @@
 /**
 Overall Stars/5
 
-Culture & values/5
-Company driven by profit or purpose and impact focused
-Mentorship opportunities or self-directed learning
-Social team with frequent events or minimal social expectations?
-
 Work/Life balance/5
-Remote work flexibility or in-office layout
-fixed or flexible hours
 Contract-based role or full-time, permanent position?
 Company with frequent changes or consistency in roles and expectations?
 Creative problem-solving or clear procedures and protocols?
 
 Career opportunities/5
-mentorship opportunities or self-directed learning
 Fast-growing startup with high potential but some risk or stable, established company with predictable growth?
 Company with frequent changes or consistency in roles and expectations?
 Rapid innovation with constant changes or steady, predictable growth?
@@ -35,17 +27,20 @@ Working with established systems or room for experimenting with new approaches?
 
 import { QuizComponent } from "./components";
 
-export type Categories =
-  | "Overall Stars"
-  | "% that would recommend to a friend"
-  | "% that approve of CEO"
-  | "% of people that have a positive business outlook"
-  | "Diversity & Inclusion"
-  | "Culture & values"
-  | "Work/Life balance"
-  | "Career opportunities"
-  | "Compensation and benefits"
-  | "Senior management";
+export const categories = [
+  "Overall Stars",
+  "% of people that have a positive business outlook",
+  "% that approve of CEO",
+  "% that would recommend to a friend",
+  "Career opportunities",
+  "Compensation and benefits",
+  "Culture & values",
+  "Diversity & Inclusion",
+  "Senior management",
+  "Work/Life balance",
+] as const;
+
+export type Categories = (typeof categories)[number];
 
 type Question = {
   a: string;
@@ -121,6 +116,49 @@ const questions: Questions = {
         "Career opportunities": -0.1,
       },
     },
+  "Company driven by profit or purpose and impact focused": {
+    a: "Company driven by profit",
+    b: "Purpose and impact focused",
+    affects: {
+      "Culture & values": 0.7,
+    },
+  },
+  "Mentorship opportunities or self-directed learning": {
+    a: "Mentorship opportunities",
+    b: "Self-directed learining",
+    affects: {
+      "Culture & values": -0.2,
+      "Career opportunities": -0.5,
+    },
+  },
+  "Social team with frequent events or minimal social expectations?": {
+    a: "Social team with frequent events",
+    b: "Minimal social expectations",
+    affects: {
+      "Culture & values": -0.7,
+    },
+  },
+  "Remote work flexibility or in-office layout": {
+    a: "Remote work flexibility",
+    b: "In-office layout",
+    affects: {
+      "Work/Life balance": -0.4,
+    },
+  },
+  "Fixed or flexible hours": {
+    a: "Fixed hours",
+    b: "Flexible hours",
+    affects: {
+      "Work/Life balance": 0.5,
+    },
+  },
+  "Contract-based role or full-time, permanent position?": {
+    a: "Contract-based role",
+    b: "Full-time, permanent position",
+    affects: {
+      "Work/Life balance": 0.3,
+    },
+  },
 };
 
 export default async function JobQuiz() {

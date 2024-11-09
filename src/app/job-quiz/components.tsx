@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Categories, Questions } from "./page";
 import { useRouter } from "next/navigation";
 
@@ -59,11 +59,11 @@ export function QuizComponent({
     };
   };
 
-  if (counter >= MIN_ANSWERS) {
-    router.push(`/${btoa(JSON.stringify(Object.values(tally)))}`);
-    router.refresh();
-    return null;
-  }
+  useEffect(() => {
+    if (counter >= MIN_ANSWERS) {
+      router.push(`/${btoa(JSON.stringify(Object.values(tally)))}`);
+    }
+  }, [router, counter, tally]);
 
   return (
     <>
