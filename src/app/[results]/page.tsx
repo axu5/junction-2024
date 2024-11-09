@@ -38,7 +38,9 @@ export default async function Results({ params }: ResultsParams) {
     const resultsObject = JSON.parse(
       atob(decodeURIComponent(results)),
     );
-    const personalityValuesArray = resultsObject.values;
+    const personalityValuesArray = JSON.parse(
+      atob(decodeURIComponent(results)),
+    );
     const opinions = resultsObject.opinions;
     if (categories.length != personalityValuesArray.length) {
       throw undefined; // bro....
@@ -50,7 +52,16 @@ export default async function Results({ params }: ResultsParams) {
     const dbClient = await client.connect();
     const database = dbClient.db("companies");
     const collection = database.collection("companies");
-    const cursor = collection.find({}, { projection: { ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } });
+    const cursor = collection.find(
+      {},
+      {
+        projection: {
+          ratingsEmbedding: 0,
+          reviewsEmbedding: 0,
+          descriptionEmbedding: 0,
+        },
+      },
+    );
     const allDocuments =
       (await cursor.toArray()) as unknown as WithId<CompanyDocument>[];
     const calculateRating = (doc: CompanyDocument) => {
@@ -82,22 +93,27 @@ export default async function Results({ params }: ResultsParams) {
       .sort((a, b) => {
         return b[1] - a[1];
       })
-      .map(value => value[0]);
+      .map((value) => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 4).map((obj) => {
-      return { ...obj, _id: undefined };
-    });
+    const topDocuments: CompanyDocument[] = sortedPreferences
+      .slice(0, 4)
+      .map((obj) => {
+        return { ...obj, _id: undefined };
+      });
 
     await client.close();
 
     return (
-        <section className="mb-8">
-          <h1 className="font-staatliches text-white font-bold text-4xl mt-6 mb-6">Top results</h1>
-          {topDocuments
-            .filter((doc) => !!doc)
-            .map((doc, i) => {
-              return <CompanySummary
+      <section className="mb-8">
+        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-white">
+          Top results
+        </h1>
+        {topDocuments
+          .filter((doc) => !!doc)
+          .map((doc, i) => {
+            return (
+              <CompanySummary
                 key={doc.name}
                 doc={doc}
                 alias={`Company ${ALPHABET[i]}`}
@@ -105,8 +121,9 @@ export default async function Results({ params }: ResultsParams) {
                 opinions={opinions}
                 match={mapToMatch(calculateRating(doc))}
               ></CompanySummary>
-            })}
-        </section>
+            );
+          })}
+      </section>
     );
   } catch (e) {
     console.error(e);

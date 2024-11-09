@@ -167,7 +167,7 @@ export default async function JobQuiz() {
 
   return (
     <div className="flex flex-col gap-y-10">
-      <h1 className="font-staatliches text-white text-5xl">Job quiz!</h1>
+      <h1 className="font-staatliches text-5xl text-white">Job quiz!</h1>
       <h2 className="text-2xl">Section 1: This or that</h2>
       <QuizComponent questions={questions} questionKey={questionKeys[randQ]} />
     </div>

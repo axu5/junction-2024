@@ -11,12 +11,11 @@ type QuizComponetProps = {
 
 const MIN_ANSWERS = 8;
 
-export function QuizComponent({
-  questions,
-  questionKey
-}: QuizComponetProps) {
+export function QuizComponent({ questions, questionKey }: QuizComponetProps) {
   const [currentQuestionKey, setCurrentQuestionKey] = useState(questionKey);
-  const [seenQuestionKeys, setSeenQuestionKeys] = useState<string[]>([questionKey]);
+  const [seenQuestionKeys, setSeenQuestionKeys] = useState<string[]>([
+    questionKey,
+  ]);
   const [opinions, setOpinions] = useState<string[]>([]);
   const question = questions[currentQuestionKey];
   const [isLoading, setIsLoading] = useState(false);
@@ -62,8 +61,11 @@ export function QuizComponent({
 
       const keys = Object.keys(questions);
 
-      while (newQuestionKey === undefined || seenQuestionKeys.includes(newQuestionKey)) {
-        newQuestionKey = keys[(Math.random() * (keys.length - 2)) | 0]
+      while (
+        newQuestionKey === undefined ||
+        seenQuestionKeys.includes(newQuestionKey)
+      ) {
+        newQuestionKey = keys[(Math.random() * (keys.length - 2)) | 0];
       }
 
       setSeenQuestionKeys((keys) => [...keys, newQuestionKey]);
@@ -76,7 +78,7 @@ export function QuizComponent({
       setIsLoading(true);
       const result = {
         values: Object.values(tally),
-        opinions
+        opinions,
       };
       router.push(`/${btoa(JSON.stringify(result))}`);
     }
@@ -84,26 +86,32 @@ export function QuizComponent({
 
   if (isLoading) {
     return (
-      <div className="h-[80%] w-full justify-around italic">Preparing results...</div>
+      <div className="h-[80%] w-full justify-around italic">
+        Preparing results...
+      </div>
     );
   }
 
   return (
     <>
-      <span className="text-white">{seenQuestionKeys.length}/{MIN_ANSWERS}</span>
-      <h1 className="text-white font-semibold text-3xl font-staatliches">{currentQuestionKey}</h1>
+      <span className="text-white">
+        {seenQuestionKeys.length}/{MIN_ANSWERS}
+      </span>
+      <h1 className="font-staatliches text-3xl font-semibold text-white">
+        {currentQuestionKey}
+      </h1>
       <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
         <div
           onClick={handleClick(-1)}
           key={question.a}
-          className="motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
+          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.a}
         </div>
         <div
           onClick={handleClick(1)}
           key={question.b}
-          className="motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
+          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.b}
         </div>
