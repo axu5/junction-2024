@@ -3,7 +3,7 @@ import { chat } from "@/app/api/chat-server";
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { alias, values, document, opinions } = await req.json();
+  const { alias, user, document } = await req.json();
 
   return await chat({
     system: `
@@ -43,9 +43,15 @@ The average rating and category ratings are a number between 0 and 5, where 5 is
 User's values (starts at --- and ends at ---):
 
 ---
-${values.join(", ")}
+${user.topValues.join(", ")}
 
-${opinions.join('\n')}
+${user.opinions.join("\n")}
+---
+
+User's preferred industries, if any (starts at --- and ends at ---):
+
+---
+${user.industries.join(", ")}
 ---
 Input (starts at --- and ends at ---):
 ---
@@ -55,6 +61,6 @@ ${JSON.stringify(document).slice(0, 10_000)}
 Use ${alias} instead of the company name everywhere.
 Turn a rating between 0 and 1 to a percentage (i.e. 0.45 becomes 45%).
 If you mention a rating between 0 and 5, mention also the maximum value (i.e. "4.5 out of 5.0" instead of just "4.5").
-        `
+        `,
   });
 }

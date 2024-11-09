@@ -3,16 +3,16 @@
 import { CompanyDocument } from "@/app/[results]/types";
 import { useEffect, useState } from "react";
 import { readChatStream } from "@/app/chat-client";
+import { UserProfile } from "@/app/user-profile";
 
 interface Props {
   alias: string;
   document: CompanyDocument;
-  values: string[];
-  opinions: string[];
+  user: UserProfile;
 }
 
 export default function RatingsSummary(props: Props) {
-  const { alias, document, values, opinions } = props;
+  const { alias, document, user } = props;
   const [chatResponse, setChatResponse] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
   const [generatedWithAlias, setGeneratedWithAlias] = useState<
@@ -28,7 +28,7 @@ export default function RatingsSummary(props: Props) {
       try {
         res = await fetch("/api/ratings-summary", {
           method: "POST",
-          body: JSON.stringify({ alias, document, values, opinions }),
+          body: JSON.stringify({ alias, document, user }),
           signal: controller.signal,
         });
       } catch (e) {
@@ -74,7 +74,7 @@ export default function RatingsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, alias, isStreaming, generatedWithAlias, opinions]);
+  }, [document, user, alias, isStreaming, generatedWithAlias]);
 
   if (chatResponse.length === 0) {
     return <p className="italic text-foreground">Thinking...</p>;

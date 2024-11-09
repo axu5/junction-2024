@@ -4,13 +4,59 @@ import { useEffect, useState } from "react";
 import { Categories, Questions } from "./types";
 import { useRouter } from "next/navigation";
 import { HexagonSharp } from "../hexagon";
+import {
+  Checkbox,
+  FormControl,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 
 type QuizComponentProps = {
   questions: Questions;
   questionKey: string;
 };
 
+type Stage = "quiz" | "industries";
+
 const MIN_ANSWERS = 10;
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const industries = [
+  "Business Consulting and Services",
+  "Software Development",
+  "Computers and Electronics Manufacturing",
+  "Telecommunications",
+  "IT Services and IT Consulting",
+  "Real Estate",
+  "Financial Services",
+  "Hospitals and Health Care",
+  "Appliances, Electrical, and Electronics Manufacturing",
+  "Retail",
+  "Industrial Machinery Manufacturing",
+  "Personal Care Product Manufacturing",
+  "Civil Engineering",
+  "Computer Games",
+  "Marketing Services",
+  "Technology, Information and Internet",
+  "Information Technology & Services",
+  "Wholesale Building Materials",
+  "Truck Transportation",
+  "Armed Forces",
+];
 
 export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
   const [currentQuestionKey, setCurrentQuestionKey] = useState(questionKey);
@@ -20,6 +66,8 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
   const [opinions, setOpinions] = useState<string[]>([]);
   const question = questions[currentQuestionKey];
   const [isLoading, setIsLoading] = useState(false);
+  const [stage, setStage] = useState<Stage>("quiz");
+  const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
   const router = useRouter();
   const [tally, setTally] = useState<{ [K in Categories]: number }>({
     "% of people that have a positive business outlook": 0,
@@ -75,19 +123,14 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
   };
 
   useEffect(() => {
-    if (seenQuestionKeys.length > MIN_ANSWERS) {
-      setIsLoading(true);
-      const result = {
-        values: Object.values(tally),
-        opinions,
-      };
-      router.push(`/${btoa(JSON.stringify(result))}`);
+    if (seenQuestionKeys.length > MIN_ANSWERS && stage === "quiz") {
+      setStage("industries");
     }
-  }, [router, seenQuestionKeys, tally, opinions]);
+  }, [seenQuestionKeys, stage]);
 
   if (isLoading) {
     return (
-      <div className="h-[80%] w-full justify-around text-center font-staatliches text-4xl">
+      <div className="font-staatliches h-[80%] w-full justify-around text-center text-4xl">
         Preparing results...
         <div className="flex h-full flex-col items-center justify-center py-12">
           <div className="grid grid-cols-2 grid-rows-2 gap-x-[2px]">
@@ -112,6 +155,60 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
     );
   }
 
+  const onIndustriesConfirmed = () => {
+    setIsLoading(true);
+    const result = {
+      values: Object.values(tally),
+      opinions,
+      industries: selectedIndustries,
+    };
+    router.push(`/${btoa(JSON.stringify(result))}`);
+  };
+
+  const onIndustriesChange = (
+    evt: SelectChangeEvent<typeof selectedIndustries>,
+  ) => {
+    const {
+      target: { value },
+    } = evt;
+    setSelectedIndustries(typeof value === "string" ? value.split(",") : value);
+  };
+
+  if (stage === "industries") {
+    return (
+      <>
+        <h1 className="font-staatliches motion-preset-pop text-3xl font-semibold text-foreground">
+          What are your preferred industries?
+        </h1>
+        <FormControl className="w-full xl:w-1/2">
+          <InputLabel>Industries</InputLabel>
+          <Select
+            multiple
+            variant="filled"
+            input={<OutlinedInput label="Tag" />}
+            value={selectedIndustries}
+            onChange={onIndustriesChange}
+            renderValue={(selected) => selected.join(", ")}
+            MenuProps={MenuProps}
+          >
+            {industries.map((name) => (
+              <MenuItem key={name} value={name}>
+                <Checkbox checked={selectedIndustries.includes(name)} />
+                <ListItemText primary={name} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <button
+          onClick={onIndustriesConfirmed}
+          className="m-4 cursor-pointer rounded-lg bg-highlight p-3 px-4 text-center font-semibold text-foreground"
+        >
+          Confirm
+        </button>
+      </>
+    );
+  }
+
   return (
     <>
       <span className="text-foreground">
@@ -119,7 +216,7 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
       </span>
       <h1
         key={currentQuestionKey}
-        className="motion-preset-pop font-staatliches text-3xl font-semibold text-foreground"
+        className="font-staatliches motion-preset-pop text-3xl font-semibold text-foreground"
       >
         {currentQuestionKey}
       </h1>

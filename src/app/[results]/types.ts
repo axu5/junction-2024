@@ -10,4 +10,5 @@ export type CompanyDocument = {
   ratingsEmbedding: number[];
   descriptionEmbedding: number[];
   reviewsEmbedding: number[];
+  industry: string;
 };

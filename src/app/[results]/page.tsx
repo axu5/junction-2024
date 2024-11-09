@@ -5,6 +5,7 @@ import { WithId } from "mongodb";
 import CompanySummary from "@/app/[results]/company-summary";
 import Link from "next/link";
 import { CompanyDocument } from "./types";
+import { UserProfile } from "@/app/user-profile";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -18,6 +19,7 @@ export default async function Results({ params }: ResultsParams) {
     const resultsObject = JSON.parse(atob(decodeURIComponent(results)));
     const personalityValuesArray = resultsObject.values;
     const opinions = resultsObject.opinions;
+    const industries = resultsObject.industries;
     if (categories.length != personalityValuesArray.length) {
       throw undefined; // bro....
     }
@@ -46,8 +48,8 @@ export default async function Results({ params }: ResultsParams) {
     const allDocuments =
       (await cursor.toArray()) as unknown as WithId<CompanyDocument>[];
     const calculateRating = (doc: CompanyDocument) => {
-      const rating =
-        (doc.ratings.reduce(
+      let rating =
+        doc.ratings.reduce(
           (acc: number, _rating: { category: Categories; rating: number }) => {
             const { category, rating } = _rating;
             if (!(category in personalityValues)) {
@@ -57,16 +59,20 @@ export default async function Results({ params }: ResultsParams) {
           },
           0,
         ) +
-          doc.positiveBusinessOutlookRate *
-            personalityValues[
-              "% of people that have a positive business outlook"
-            ] +
-          doc.ceo.approval * personalityValues["% that approve of CEO"] +
-          doc.recommendRate *
-            personalityValues["% that would recommend to a friend"] +
-          doc.rating / 5) /
-        (doc.ratings.length + 4);
-      return rating;
+        doc.positiveBusinessOutlookRate *
+          personalityValues[
+            "% of people that have a positive business outlook"
+          ] +
+        doc.ceo.approval * personalityValues["% that approve of CEO"] +
+        doc.recommendRate *
+          personalityValues["% that would recommend to a friend"] +
+        doc.rating / 5;
+
+      if (industries.includes(doc.industry)) {
+        rating += 0.8;
+      }
+
+      return rating / (doc.ratings.length + 5);
     };
     const sortedPreferences = allDocuments.sort((docA, docB) => {
       return calculateRating(docB) - calculateRating(docA);
@@ -86,9 +92,15 @@ export default async function Results({ params }: ResultsParams) {
 
     await client.close();
 
+    const userProfile: UserProfile = {
+      topValues,
+      opinions,
+      industries,
+    };
+
     return (
       <section className="mb-8">
-        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
+        <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
           Top results
         </h1>
         <p className="py-6">
@@ -114,8 +126,7 @@ export default async function Results({ params }: ResultsParams) {
                 key={doc.name}
                 doc={doc}
                 alias={`Company ${ALPHABET[i]}`}
-                topValues={topValues}
-                opinions={opinions}
+                user={userProfile}
                 match={((calculateRating(doc) * 10000) | 0) / 100 + "%"}
               ></CompanySummary>
             );
