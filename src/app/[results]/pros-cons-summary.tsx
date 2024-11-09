@@ -4,6 +4,7 @@ import { CompanyDocument } from "@/app/[results]/page";
 import { useEffect, useState } from "react";
 
 interface Props {
+  alias: string,
   document: CompanyDocument,
   values: string[]
 }
@@ -14,7 +15,7 @@ type Content = {
 }
 
 export default function ProsConsSummary(props: Props) {
-  const { document, values } = props;
+  const { alias, document, values } = props;
   const [content, setContent] = useState<Content | string | undefined>(undefined);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function ProsConsSummary(props: Props) {
       try {
         res = await fetch('/api/pros-cons-summary', {
           method: "POST",
-          body: JSON.stringify({ document, values }),
+          body: JSON.stringify({ alias, document, values }),
           signal: controller.signal
         });
       } catch (e) {
@@ -71,7 +72,7 @@ export default function ProsConsSummary(props: Props) {
   }, [document, values, content]);
 
   if (content === undefined) {
-    return <p>Loading...</p>
+    return <p className="italic">Loading...</p>
   }
 
   if (typeof content === 'string') {
@@ -79,12 +80,12 @@ export default function ProsConsSummary(props: Props) {
   }
 
   return <section>
-    <h2>Pros</h2>
-    <ul>
+    <h2 className="font-semibold">Pros</h2>
+    <ul className="list-decimal">
       {content.pros.map((pro) => <li key={pro}>{pro}</li>)}
     </ul>
-    <h2>Cons</h2>
-    <ul>
+    <h2 className="font-semibold mt-4">Cons</h2>
+    <ul className="list-decimal">
       {content.cons.map((con) => <li key={con}>{con}</li>)}
     </ul>
   </section>

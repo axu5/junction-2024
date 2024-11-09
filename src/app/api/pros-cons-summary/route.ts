@@ -3,7 +3,7 @@ import { json } from "@/app/api/chat-server";
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { values, document } = await req.json();
+  const { alias, values, document } = await req.json();
 
   return await json({
     system: `
@@ -20,6 +20,8 @@ The output MUST be valid JSON. It must NOT contain anything other than the JSON.
 passed to JSON.parse without issues.
 
 Give more importance to pros and cons that relate to the user's values.
+
+The company name must not be included in the input. Use the alias ${alias} instead.
 `,
     prompt: `
 The input follows this type:
@@ -53,7 +55,10 @@ Input (starts at --- and ends at ---):
 ${JSON.stringify(document).slice(0, 10_000)}
 ---
 
-If a pro or con is written in first person, surround it in double quotes.
+Use ${alias} instead of the company name everywhere.
+
+If a pro or con is written in first person, surround it in double quotes and state what role the
+person writing the comment has, if they have one.
 Feel free to modify the text so that it is grammatically correct without changing its meaning.
 If text is very informal, surround it in double quotes.
 

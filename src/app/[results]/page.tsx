@@ -21,6 +21,8 @@ export type CompanyDocument = {
   reviewsEmbedding: number[];
 };
 
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+
 export default async function Results({ params }: ResultsParams) {
   try {
     const { results } = await params;
@@ -72,36 +74,43 @@ export default async function Results({ params }: ResultsParams) {
       .map(value => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 3).map((obj) => {
+    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 4).map((obj) => {
       return { ...obj, _id: undefined };
     });
 
     await client.close();
 
     return (
-      <>
         <section>
-          <h1>Top results</h1>
-          {topDocuments.filter((doc) => !!doc).map((doc) => {
-            return <div key={doc.name}>
-              <h1>{doc.name}</h1>
-              <h2>Summary</h2>
-              <RatingsSummary document={doc} values={topValues}></RatingsSummary>
-              <h2>Pros & Cons</h2>
-              <ProsConsSummary document={doc} values={topValues}></ProsConsSummary>
-            </div>
-          })}
+          <h1 className="font-bold text-4xl mt-6 mb-6">Top results</h1>
+          {topDocuments
+            .filter((doc) => !!doc)
+            .map((doc, i) => {
+              return (
+                <div key={doc.name}>
+                  <h1 className="font-semibold text-5xl sticky top-0 bg-background z-10">Company {ALPHABET[i]}</h1>
+                  <div className="flex flex-row gap-x-8">
+                    <div className="w-1/2">
+                      <h2 className="text-2xl sticky top-[3rem] bg-background">Summary</h2>
+                      <RatingsSummary
+                        document={doc}
+                        alias={`Company ${ALPHABET[i]}`}
+                        values={topValues}
+                      ></RatingsSummary>
+                    </div>
+                    <div className="w-1/2">
+                      <h2 className="text-2xl sticky top-[3rem] bg-background">Pros & Cons</h2>
+                      <ProsConsSummary
+                        document={doc}
+                        alias={`Company ${ALPHABET[i]}`}
+                        values={topValues}
+                      ></ProsConsSummary>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </section>
-        {sortedPreferences.map((preference) => {
-          return (
-            <div key={preference.name}>
-              <span>
-                {(calculateRating(preference) * 100) | 0} {preference.name}
-              </span>
-            </div>
-          );
-        })}
-      </>
     );
   } catch (e) {
     console.error(e);
