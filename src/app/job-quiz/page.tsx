@@ -117,7 +117,7 @@ const questions: Questions = {
   },
   "Mentorship opportunities or self-directed learning?": {
     a: "Mentorship opportunities",
-    b: "Self-directed learining",
+    b: "Self-directed learning",
     affects: {
       "Culture & values": -0.2,
       "Career opportunities": -0.5,
@@ -152,7 +152,7 @@ const questions: Questions = {
     },
   },
   "Company with frequent changes or consistency in roles and expectations?": {
-    a: "Frequent changes in roles and expections",
+    a: "Frequent changes in roles and expectations",
     b: "Consistency in roles and expectations",
     affects: {},
   },
@@ -162,7 +162,7 @@ const questions: Questions = {
     affects: {},
   },
   "Individual rewards or team-based incentives?": {
-    a: "Invididual rewards",
+    a: "Individual rewards",
     b: "Team-based incentives",
     affects: {},
   },
