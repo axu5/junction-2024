@@ -100,7 +100,7 @@ export default async function Results({ params }: ResultsParams) {
 
     return (
       <section className="mb-8">
-        <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
+        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
           Top results
         </h1>
         <p className="py-6">
@@ -125,7 +125,7 @@ export default async function Results({ params }: ResultsParams) {
               <CompanySummary
                 key={doc.name}
                 doc={doc}
-                alias={`Company ${ALPHABET[i]}`}
+                alias={`Company ${ALPHABET[i % ALPHABET.length]}`}
                 user={userProfile}
                 match={((calculateRating(doc) * 10000) | 0) / 100 + "%"}
               ></CompanySummary>
