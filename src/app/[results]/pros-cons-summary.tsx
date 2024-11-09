@@ -3,6 +3,7 @@
 import { CompanyDocument } from "@/app/[results]/page";
 import { useEffect, useState } from "react";
 import { BulletPoints } from "@/app/[results]/company-summary";
+import { Placeholder } from "@/app/placeholder";
 
 type Content = {
   pros: string[];
@@ -96,7 +97,7 @@ export default function ProsConsSummary(props: Props) {
   }, [document, values, alias, content, generatedWithAlias, opinions]);
 
   if (content === undefined) {
-    return <p className="italic text-foreground">Loading...</p>;
+    return <Placeholder></Placeholder>;
   }
 
   if (typeof content === "string") {

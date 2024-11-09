@@ -8,6 +8,7 @@ import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ArrowDownIcon } from "lucide-react";
 import { Benefit } from "@/app/benefits";
 import { Frustration } from "@/app/frustration";
+import { Placeholder } from "@/app/placeholder";
 
 interface Props {
   doc: CompanyDocument;
@@ -21,6 +22,19 @@ export type BulletPoints = {
   pros: string[];
   cons: string[];
 };
+
+function BulletPointsPlaceholder() {
+  return (
+    <div>
+      <div className="flex h-full flex-col items-center justify-center">
+        <p className="text-large my-3 font-semibold">
+          We&#39;re preparing bullet points for you...
+        </p>
+        <Placeholder></Placeholder>
+      </div>
+    </div>
+  );
+}
 
 function BulletPoints(props: { bulletPoints: BulletPoints }) {
   const { bulletPoints } = props;
@@ -87,7 +101,9 @@ export default function CompanySummary(props: Props) {
           {revealed ? "Revealed" : "Reveal company"}
         </button>
       </div>
-      {bulletPoints === undefined ? undefined : (
+      {bulletPoints === undefined ? (
+        <BulletPointsPlaceholder></BulletPointsPlaceholder>
+      ) : (
         <BulletPoints bulletPoints={bulletPoints}></BulletPoints>
       )}
       <div className="flex flex-col gap-x-8">
