@@ -22,26 +22,35 @@ passed to JSON.parse without issues.
 Give more importance to pros and cons that relate to the user's values.
 
 The company name must not be included in the input. Use the alias ${alias} instead.
+If the alias is the same as the company name, ignore the instruction.
 `,
     prompt: `
 The input follows this type:
 
 type Category = {
-category: string;
-rating: number;
+  category: string;
+  rating: number;
 };
 
 type CEO = {
-name: string;
-approvalRate: number;
+  name: string;
+  approvalRate: number;
+};
+
+type Review = {
+  rating: number; // 0 - 5
+  pros: string;
+  cons: string;
+  role: string; // Role of the person writing the review
 };
 
 type Input = {
-average: number;
-categories: Category[];
-recommendRate: number;
-positiveBusinessOutlookRate: number;
-ceo: CEO;
+  average: number;
+  categories: Category[];
+  reviews: Review[];
+  recommendRate: number;
+  positiveBusinessOutlookRate: number;
+  ceo: CEO;
 };
 
 The average rating and category ratings are a number between 0 and 5, where 5 is best. Recommend rate, positive business outlook rate and CEO approval rate are numbers between 0 and 1, where 1 is best. If any field does not conform to the spec, ignore it.
@@ -55,11 +64,13 @@ Input (starts at --- and ends at ---):
 ${JSON.stringify(document).slice(0, 10_000)}
 ---
 
-Use ${alias} instead of the company name everywhere.
+Use ${alias} instead of the company name everywhere. If the alias is the same as the company name,
+do not change the approach.
 
-If a pro or con is written in first person, surround it in double quotes and state what role the
-person writing the comment has, if they have one.
+If a pro or con is written in first person or clearly talks about someone's experiences, surround it in double
+quotes and state what role the person writing the comment has, if they have one.
 Feel free to modify the text so that it is grammatically correct without changing its meaning.
+The only exception to this is the alias.
 If text is very informal, surround it in double quotes.
 
 If you mention a rating, also the maximum value (i.e. "4.5 out of 5.0" instead of just "4.5")

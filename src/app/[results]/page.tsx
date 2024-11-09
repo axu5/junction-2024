@@ -80,7 +80,7 @@ export default async function Results({ params }: ResultsParams) {
     await client.close();
 
     return (
-        <section>
+        <section className="mb-8">
           <h1 className="font-bold text-4xl mt-6 mb-6">Top results</h1>
           {topDocuments
             .filter((doc) => !!doc)
