@@ -9,7 +9,7 @@ type QuizComponetProps = {
   questionKey: string;
 };
 
-const MIN_ANSWERS = 8;
+const MIN_ANSWERS = 10;
 
 export function QuizComponent({ questions, questionKey }: QuizComponetProps) {
   const [currentQuestionKey, setCurrentQuestionKey] = useState(questionKey);
