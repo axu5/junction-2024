@@ -89,12 +89,12 @@ export default function ProsConsSummary(props: Props) {
   }
 
   return <section>
-    <h2 className="font-semibold">Pros</h2>
-    <ul className="list-decimal">
+    <h2 className="font-semibold text-white">Pros</h2>
+    <ul className="list-decimal text-white">
       {content.pros.map((pro) => <li key={pro}>{pro}</li>)}
     </ul>
-    <h2 className="font-semibold mt-4">Cons</h2>
-    <ul className="list-decimal">
+    <h2 className="font-semibold mt-4 text-white">Cons</h2>
+    <ul className="list-decimal text-white">
       {content.cons.map((con) => <li key={con}>{con}</li>)}
     </ul>
   </section>

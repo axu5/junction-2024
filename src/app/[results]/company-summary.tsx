@@ -27,7 +27,7 @@ export default function CompanySummary(props: Props) {
         <h1 className="text-5xl font-semibold">{currentAlias}</h1>
         <button
           onClick={onRevealCompany}
-          className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center"
+          className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center text-white"
           disabled={revealed}
         >
           {revealed ? "Revealed" : "Reveal company"}
