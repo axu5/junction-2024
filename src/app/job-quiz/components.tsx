@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Categories, Questions } from "./page";
+import { Categories, Questions } from "./types";
 import { useRouter } from "next/navigation";
 import { HexagonSharp } from "../hexagon";
 
