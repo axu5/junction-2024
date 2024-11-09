@@ -4,6 +4,8 @@ import RatingsSummary from "@/app/[results]/ratings-summary";
 import ProsConsSummary from "@/app/[results]/pros-cons-summary";
 import { CompanyDocument } from "@/app/[results]/page";
 import { useState } from "react";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { ArrowDownIcon } from "lucide-react";
 
 interface Props {
   doc: CompanyDocument;
@@ -24,7 +26,7 @@ export default function CompanySummary(props: Props) {
   }
 
   return (
-    <div className="min-h-[60vh] pb-8">
+    <div className="pb-8">
       <div className="flex flex-row justify-between items-center sticky top-4 z-10 bg-secondary-backdrop rounded-xl backdrop-blur-sm">
         <h1 className="font-staatliches px-5 py-8 text-white text-3xl xl:text-5xl font-semibold">{currentAlias}</h1>
         <p>{match} match</p>
@@ -37,26 +39,32 @@ export default function CompanySummary(props: Props) {
         </button>
       </div>
       <div className="flex flex-col gap-x-8">
-        <div>
-          <h2 className="text-2xl px-5 py-3">Summary</h2>
-          <RatingsSummary
-            document={doc}
-            alias={currentAlias}
-            values={topValues}
-            opinions={opinions}
-          ></RatingsSummary>
-        </div>
-        <div>
-          <h2 className="text-2xl px-5 py-3">
+        <Accordion>
+          <AccordionSummary expandIcon={<ArrowDownIcon />}>
+            Summary
+          </AccordionSummary>
+          <AccordionDetails>
+            <RatingsSummary
+              document={doc}
+              alias={currentAlias}
+              values={topValues}
+              opinions={opinions}
+            ></RatingsSummary>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary expandIcon={<ArrowDownIcon />}>
             Pros & Cons
-          </h2>
-          <ProsConsSummary
-            document={doc}
-            alias={currentAlias}
-            values={topValues}
-            opinions={opinions}
-          ></ProsConsSummary>
-        </div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ProsConsSummary
+              document={doc}
+              alias={currentAlias}
+              values={topValues}
+              opinions={opinions}
+            ></ProsConsSummary>
+          </AccordionDetails>
+        </Accordion>
       </div>
     </div>
   );

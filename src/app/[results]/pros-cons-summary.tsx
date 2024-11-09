@@ -92,16 +92,16 @@ export default function ProsConsSummary(props: Props) {
   return (
     <section className="flex flex-col xl:flex-row gap-10">
       <div className="xl:w-1/2 mb-4">
-        <h2 className="font-semibold text-xl text-white">Pros</h2>
-        <ul className="list-decimal text-white">
+        <h2 className="font-semibold text-xl">Pros</h2>
+        <ul className="list-decimal">
           {content.pros.map((pro) => (
             <li key={pro}>{pro}</li>
           ))}
         </ul>
       </div>
       <div className="xl:w-1/2 mb-4">
-        <h2 className="font-semibold text-xl text-white">Cons</h2>
-        <ul className="list-decimal text-white">
+        <h2 className="font-semibold text-xl">Cons</h2>
+        <ul className="list-decimal">
           {content.cons.map((con) => (
             <li key={con}>{con}</li>
           ))}
