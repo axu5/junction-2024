@@ -81,11 +81,11 @@ export default function ProsConsSummary(props: Props) {
   }, [document, values, alias, content, generatedWithAlias]);
 
   if (content === undefined) {
-    return <p className="italic">Loading...</p>
+    return <p className="italic text-white">Loading...</p>
   }
 
   if (typeof content === 'string') {
-    return <p>{content}</p>
+    return <p className="text-white">{content}</p>
   }
 
   return <section>
