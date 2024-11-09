@@ -76,12 +76,14 @@ export function QuizComponent({
       <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
         <div
           onClick={handleClick(-1)}
+          key={question.a}
           className="motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
         >
           {question.a}
         </div>
         <div
           onClick={handleClick(1)}
+          key={question.b}
           className="motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
         >
           {question.b}
