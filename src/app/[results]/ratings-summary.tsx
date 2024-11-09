@@ -1,6 +1,6 @@
 "use client";
 
-import { CompanyDocument } from "@/app/[results]/page";
+import { CompanyDocument } from "@/app/[results]/types";
 import { useEffect, useState } from "react";
 import { readChatStream } from "@/app/chat-client";
 

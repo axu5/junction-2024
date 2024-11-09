@@ -2,12 +2,13 @@
 
 import RatingsSummary from "@/app/[results]/ratings-summary";
 import ProsConsSummary from "@/app/[results]/pros-cons-summary";
-import { CompanyDocument } from "@/app/[results]/page";
+import { CompanyDocument } from "@/app/[results]/types";
 import { useState } from "react";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { ArrowDownIcon } from "lucide-react";
 import { Benefit } from "@/app/benefits";
 import { Frustration } from "@/app/frustration";
+import { Placeholder } from "@/app/placeholder";
 
 interface Props {
   doc: CompanyDocument;
@@ -21,6 +22,19 @@ export type BulletPoints = {
   pros: string[];
   cons: string[];
 };
+
+function BulletPointsPlaceholder() {
+  return (
+    <div>
+      <div className="flex h-full flex-col items-center justify-center">
+        <p className="text-large my-3 font-semibold">
+          We&#39;re preparing bullet points for you...
+        </p>
+        <Placeholder></Placeholder>
+      </div>
+    </div>
+  );
+}
 
 function BulletPoints(props: { bulletPoints: BulletPoints }) {
   const { bulletPoints } = props;
@@ -75,7 +89,7 @@ export default function CompanySummary(props: Props) {
   return (
     <div className="pb-8">
       <div className="bg-secondary-backdrop flex flex-row items-center justify-between rounded-xl backdrop-blur-sm">
-        <h1 className="font-staatliches px-5 py-8 text-3xl font-semibold text-foreground xl:text-5xl">
+        <h1 className="px-5 py-8 font-staatliches text-3xl font-semibold text-foreground xl:text-5xl">
           {currentAlias}
         </h1>
         <p className="text-xl font-semibold">{match} match</p>
@@ -87,7 +101,9 @@ export default function CompanySummary(props: Props) {
           {revealed ? "Revealed" : "Reveal company"}
         </button>
       </div>
-      {bulletPoints === undefined ? undefined : (
+      {bulletPoints === undefined ? (
+        <BulletPointsPlaceholder></BulletPointsPlaceholder>
+      ) : (
         <BulletPoints bulletPoints={bulletPoints}></BulletPoints>
       )}
       <div className="flex flex-col gap-x-8">
