@@ -18,6 +18,7 @@ export default function Home() {
               <span className="text-highlight">bee yourself</span> — In a
               workplace that aligns with what matters to you most
             </h2>
+            <p>Made with ❤️ in Junction</p>
           </div>
           {/* <Link
           className="bg-primary flex flex-row justify-center rounded-full p-3 text-center text-foreground"
@@ -43,7 +44,7 @@ export default function Home() {
       </div>
       <Link
         href="/job-quiz"
-        className="absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center font-staatliches text-3xl text-foreground"
+        className="font-staatliches absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center text-3xl text-foreground"
       >
         Get started
       </Link>
