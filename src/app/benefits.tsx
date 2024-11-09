@@ -11,7 +11,7 @@ export function Benefit({ name, className }: BenefitProps) {
   return (
     <div
       className={cn(
-        "motion-preset-slide-left flex flex-row items-center justify-start gap-x-3 rounded-full bg-secondary px-5 py-3 text-center font-staatliches text-lg uppercase text-foreground",
+        "bg-secondary font-staatliches motion-preset-slide-left flex flex-row items-center justify-start gap-x-3 rounded-full px-5 py-3 text-center text-lg uppercase text-foreground",
         className,
       )}
     >

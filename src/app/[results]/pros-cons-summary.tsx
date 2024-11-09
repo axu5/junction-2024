@@ -2,21 +2,23 @@
 
 import { CompanyDocument } from "@/app/[results]/page";
 import { useEffect, useState } from "react";
-
-interface Props {
-  alias: string;
-  document: CompanyDocument;
-  values: string[];
-  opinions: string[];
-}
+import { BulletPoints } from "@/app/[results]/company-summary";
 
 type Content = {
   pros: string[];
   cons: string[];
 };
 
+interface Props {
+  alias: string;
+  document: CompanyDocument;
+  values: string[];
+  opinions: string[];
+  bulletPointsCallback: (bulletPoints: BulletPoints) => void;
+}
+
 export default function ProsConsSummary(props: Props) {
-  const { alias, document, values, opinions } = props;
+  const { alias, document, values, opinions, bulletPointsCallback } = props;
   const [content, setContent] = useState<Content | string | undefined>(
     undefined,
   );
@@ -65,6 +67,11 @@ export default function ProsConsSummary(props: Props) {
 
       setContent(result);
       setGeneratedWithAlias(alias);
+
+      bulletPointsCallback({
+        pros: result.bulletPointsPros,
+        cons: result.bulletPointsCons,
+      });
     };
 
     let shouldRegenerate = content === undefined;

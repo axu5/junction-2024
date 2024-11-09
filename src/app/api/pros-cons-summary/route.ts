@@ -8,12 +8,15 @@ export async function POST(req: Request) {
   return await json({
     system: `
 Using information of a company and the values of an user, list the 5 most common pros and 5 most common cons.
+Also, include three short bullet points from both pros and cons. Format them in the form [adjective] [verb].
 Use reviews as references, and mention them whenever possible.
 Format your output as following this JSON:
 
 {
   pros: [/* insert pros here as strings */],
-  cons: [/* insert cons here as strings */]
+  cons: [/* insert cons here as strings */],
+  bulletPointsPros: [/* short bullet points built from pros */],
+  bulletPointsCons: [/* short bullet points built from cons */]
 }
 
 The output MUST be valid JSON. It must NOT contain anything other than the JSON. The output must be able to be
@@ -55,7 +58,7 @@ User's values (starts at --- and ends at ---):
 ---
 ${values.join(", ")}
 
-${opinions.join('\n')}
+${opinions.join("\n")}
 ---
 Input (starts at --- and ends at ---):
 ---
@@ -74,6 +77,6 @@ If text is very informal, surround it in double quotes.
 If you mention a rating, also the maximum value (i.e. "4.5 out of 5.0" instead of just "4.5")
 
 Remember: give your output as plain JSON.
-        `
+        `,
   });
 }

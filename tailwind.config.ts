@@ -14,6 +14,7 @@ export default {
         primary: "var(--primary)",
         highlight: "var(--highlight)",
         secondary: "var(--secondary)",
+        tertiary: "var(--tertiary)",
         "secondary-backdrop": "var(--secondary-backdrop)",
       },
       fontFamily: {
