@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Image from "next/image";
 import "./globals.css";
+import Link from "next/link";
 
 const staatlichesRegular = localFont({
   src: "./fonts/Staatliches-Regular.ttf",
@@ -24,12 +25,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${staatlichesRegular.variable} antialiased`}>
-        <main className="mx-auto px-20 pt-10">
-          <Image
-            src={HustleHiveLogoWithText}
-            alt="Hustlehive logo with text"
-            className="max-w-36 object-cover object-center"
-          />
+        <main className="mx-auto max-w-7xl px-20 pt-10">
+          <nav className="sticky flex w-full flex-row items-center justify-between">
+            <Link href="/">
+              <Image
+                src={HustleHiveLogoWithText}
+                alt="Hustlehive logo with text"
+                className="max-w-36 object-cover object-center xl:-translate-x-32"
+              />
+            </Link>
+          </nav>
           {children}
 
           <HexagonGroup className="bottom-5 left-3" />
