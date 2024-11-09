@@ -89,11 +89,11 @@ export default function ProsConsSummary(props: Props) {
   }, [document, values, alias, content, generatedWithAlias, opinions]);
 
   if (content === undefined) {
-    return <p className="italic">Loading...</p>;
+    return <p className="italic text-foreground">Loading...</p>;
   }
 
   if (typeof content === "string") {
-    return <p>{content}</p>;
+    return <p className="text-foreground">{content}</p>;
   }
 
   return (

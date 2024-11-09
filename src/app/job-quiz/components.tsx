@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { Categories, Questions } from "./page";
 import { useRouter } from "next/navigation";
 
-type QuizComponetProps = {
+type QuizComponentProps = {
   questions: Questions;
   questionKey: string;
 };
 
 const MIN_ANSWERS = 10;
 
-export function QuizComponent({ questions, questionKey }: QuizComponetProps) {
+export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
   const [currentQuestionKey, setCurrentQuestionKey] = useState(questionKey);
   const [seenQuestionKeys, setSeenQuestionKeys] = useState<string[]>([
     questionKey,
@@ -94,10 +94,10 @@ export function QuizComponent({ questions, questionKey }: QuizComponetProps) {
 
   return (
     <>
-      <span className="text-white">
+      <span className="text-foreground">
         {seenQuestionKeys.length}/{MIN_ANSWERS}
       </span>
-      <h1 className="font-staatliches text-3xl font-semibold text-white">
+      <h1 className="font-staatliches text-3xl font-semibold text-foreground">
         {currentQuestionKey}
       </h1>
       <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
