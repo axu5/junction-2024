@@ -9,18 +9,18 @@ export default function Home() {
       <div className="flex flex-col xl:flex-row">
         <div className="flex flex-col">
           <div className="flex flex-col gap-y-5 py-20 xl:max-w-[60%]">
-            <h1 className="font-staatliches text-7xl uppercase text-white">
+            <h1 className="font-staatliches text-7xl uppercase text-foreground">
               Ignore the <span className="text-highlight">buzz</span> with AI
               powered job search
             </h1>
-            <h2 className="font-staatliches text-3xl uppercase text-white">
+            <h2 className="font-staatliches text-3xl uppercase text-foreground">
               Find a role that lets you{" "}
               <span className="text-highlight">bee yourself</span> — In a
               workplace that aligns with what matters to you most
             </h2>
           </div>
           {/* <Link
-          className="bg-primary flex flex-row justify-center rounded-full p-3 text-center text-white"
+          className="bg-primary flex flex-row justify-center rounded-full p-3 text-center text-foreground"
           href="/job-quiz"
         >
           Get Started <ArrowRight />
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
       <Link
         href="/job-quiz"
-        className="absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center font-staatliches text-3xl text-white"
+        className="absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center font-staatliches text-3xl text-foreground"
       >
         Get started
       </Link>

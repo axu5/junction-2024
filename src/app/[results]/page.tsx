@@ -98,7 +98,7 @@ export default async function Results({ params }: ResultsParams) {
 
     return (
       <section className="mb-8">
-        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-white">
+        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
           Top results
         </h1>
         {topDocuments

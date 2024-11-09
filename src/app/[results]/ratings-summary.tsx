@@ -15,7 +15,9 @@ export default function RatingsSummary(props: Props) {
   const { alias, document, values, opinions } = props;
   const [chatResponse, setChatResponse] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
-  const [generatedWithAlias, setGeneratedWithAlias] = useState<string | undefined>(undefined);
+  const [generatedWithAlias, setGeneratedWithAlias] = useState<
+    string | undefined
+  >(undefined);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -24,14 +26,14 @@ export default function RatingsSummary(props: Props) {
       let res: Response;
 
       try {
-        res = await fetch('/api/ratings-summary', {
+        res = await fetch("/api/ratings-summary", {
           method: "POST",
           body: JSON.stringify({ alias, document, values, opinions }),
-          signal: controller.signal
+          signal: controller.signal,
         });
       } catch (e) {
         if (e instanceof Error) {
-          if (e.name !== 'AbortError') {
+          if (e.name !== "AbortError") {
             setChatResponse(e.message);
           }
         }
@@ -54,7 +56,10 @@ export default function RatingsSummary(props: Props) {
 
     let shouldRegenerate = isStreaming;
 
-    if (typeof generatedWithAlias === 'string' && alias !== generatedWithAlias) {
+    if (
+      typeof generatedWithAlias === "string" &&
+      alias !== generatedWithAlias
+    ) {
       shouldRegenerate = true;
       setIsStreaming(true);
       setChatResponse("");
@@ -72,8 +77,13 @@ export default function RatingsSummary(props: Props) {
   }, [document, values, alias, isStreaming, generatedWithAlias]);
 
   if (chatResponse.length === 0) {
-    return <p className="italic text-white">Thinking...</p>
+    return <p className="italic text-foreground">Thinking...</p>;
   }
 
-  return <p>{ chatResponse }{ isStreaming ? "..." : null }</p>
+  return (
+    <p>
+      {chatResponse}
+      {isStreaming ? "..." : null}
+    </p>
+  );
 }

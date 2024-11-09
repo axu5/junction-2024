@@ -17,22 +17,24 @@ interface Props {
 
 export default function CompanySummary(props: Props) {
   const { doc, alias, topValues, opinions, match } = props;
-  const [ currentAlias, setCurrentAlias ] = useState(alias);
-  const [ revealed, setRevealed ] = useState(false);
+  const [currentAlias, setCurrentAlias] = useState(alias);
+  const [revealed, setRevealed] = useState(false);
 
   const onRevealCompany = () => {
     setCurrentAlias(doc.name);
     setRevealed(true);
-  }
+  };
 
   return (
     <div className="pb-8">
-      <div className="flex flex-row justify-between items-center sticky top-4 z-10 bg-secondary-backdrop rounded-xl backdrop-blur-sm">
-        <h1 className="font-staatliches px-5 py-8 text-white text-3xl xl:text-5xl font-semibold">{currentAlias}</h1>
+      <div className="bg-secondary-backdrop sticky top-4 z-10 flex flex-row items-center justify-between rounded-xl backdrop-blur-sm">
+        <h1 className="px-5 py-8 font-staatliches text-3xl font-semibold text-foreground xl:text-5xl">
+          {currentAlias}
+        </h1>
         <p>{match} match</p>
         <button
           onClick={onRevealCompany}
-          className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center text-white"
+          className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center text-foreground"
           disabled={revealed}
         >
           {revealed ? "Revealed" : "Reveal company"}
