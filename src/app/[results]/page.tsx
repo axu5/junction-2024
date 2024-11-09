@@ -84,9 +84,10 @@ export default async function Results({ params }: ResultsParams) {
           <h1>Top results</h1>
           {topDocuments.filter((doc) => !!doc).map((doc) => {
             return <div key={doc.name}>
-              <h1>Summary</h1>
+              <h1>{doc.name}</h1>
+              <h2>Summary</h2>
               <RatingsSummary document={doc} values={topValues}></RatingsSummary>
-              <h1>Pros & Cons</h1>
+              <h2>Pros & Cons</h2>
               <ProsConsSummary document={doc} values={topValues}></ProsConsSummary>
             </div>
           })}

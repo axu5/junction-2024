@@ -51,6 +51,12 @@ Input (starts at --- and ends at ---):
 ${JSON.stringify(document).slice(0, 10_000)}
 ---
 
+If a pro or con is written in first person, surround it in double quotes.
+Feel free to modify the text so that it is grammatically correct without changing its meaning.
+If text is very informal, surround it in double quotes.
+
+If you mention a rating, also the maximum value (i.e. "4.5 out of 5.0" instead of just "4.5")
+
 Remember: give your output as plain JSON.
         `
   });
