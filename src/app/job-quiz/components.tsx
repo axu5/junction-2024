@@ -9,7 +9,7 @@ type QuizComponetProps = {
   qIdx: number;
 };
 
-const MIN_ANSWERS = 3;
+const MIN_ANSWERS = 10;
 
 export function QuizComponent({
   questions: _questions,
@@ -66,25 +66,29 @@ export function QuizComponent({
 
   if (isLoading) {
     return (
-      <div className="h-[80%] w-full justify-around italic">Preparing results...</div>
+      <div className="h-[80%] w-full justify-around italic">
+        Preparing results...
+      </div>
     );
   }
 
   return (
     <>
-      {counter + 1}/{MIN_ANSWERS}
+      <span className="text-highlight">
+        {counter + 1}/{MIN_ANSWERS}
+      </span>
       <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
         <div
           onClick={handleClick(-1)}
           key={question.a}
-          className="motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
+          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black bg-highlight p-10 text-center font-staatliches text-xl text-white motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate hover:shadow-xl"
         >
           {question.a}
         </div>
         <div
           onClick={handleClick(1)}
           key={question.b}
-          className="motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-opacity-in-[0%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black p-10 text-center"
+          className="flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black bg-highlight p-10 text-center font-staatliches text-xl text-white motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate hover:shadow-xl"
         >
           {question.b}
         </div>

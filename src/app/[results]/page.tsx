@@ -81,7 +81,7 @@ export default async function Results({ params }: ResultsParams) {
 
     return (
         <section className="mb-8">
-          <h1 className="font-bold text-4xl mt-6 mb-6">Top results</h1>
+          <h1 className="font-staatliches text-white font-bold text-4xl mt-6 mb-6">Top results</h1>
           {topDocuments
             .filter((doc) => !!doc)
             .map((doc, i) => {

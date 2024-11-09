@@ -14,6 +14,7 @@ export default {
         primary: "var(--primary)",
         highlight: "var(--highlight)",
         secondary: "var(--secondary)",
+        "secondary-backdrop": "var(--secondary-backdrop)",
       },
       fontFamily: {
         staatliches: "var(--font-staatliches-regular)",

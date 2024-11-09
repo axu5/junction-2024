@@ -43,14 +43,14 @@ export default function Home() {
       </div>
       <Link
         href="/job-quiz"
-        className="mx-auto my-5 flex max-w-lg flex-row justify-center rounded-full bg-highlight px-5 py-5 text-center font-staatliches text-3xl text-white"
+        className="absolute bottom-20 left-1/2 mx-auto my-5 flex -translate-x-1/2 -translate-y-1/2 flex-row justify-center rounded-full bg-highlight px-16 py-5 text-center font-staatliches text-3xl text-white"
       >
         Get started
       </Link>
       <Image
         src={HustleHiveArrowDown}
         alt="Scroll down for more"
-        className="motion-preset-oscillate absolute right-20 w-16 object-cover object-center"
+        className="motion-preset-oscillate absolute bottom-10 right-20 w-16 object-cover object-center"
       />
     </>
   );
