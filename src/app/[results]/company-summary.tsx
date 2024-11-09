@@ -10,10 +10,11 @@ interface Props {
   alias: string;
   topValues: string[];
   opinions: string[];
+  match: string;
 }
 
 export default function CompanySummary(props: Props) {
-  const { doc, alias, topValues, opinions } = props;
+  const { doc, alias, topValues, opinions, match } = props;
   const [ currentAlias, setCurrentAlias ] = useState(alias);
   const [ revealed, setRevealed ] = useState(false);
 
@@ -26,6 +27,7 @@ export default function CompanySummary(props: Props) {
     <div className="min-h-[60vh] pb-8">
       <div className="flex flex-row justify-between items-center sticky top-4 z-10 bg-secondary-backdrop rounded-xl backdrop-blur-sm">
         <h1 className="font-staatliches px-5 py-8 text-white text-3xl xl:text-5xl font-semibold">{currentAlias}</h1>
+        <p>{match} match</p>
         <button
           onClick={onRevealCompany}
           className="m-4 cursor-pointer justify-center rounded-lg border border-white p-3 text-center text-white"

@@ -22,6 +22,16 @@ export type CompanyDocument = {
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 
+// *Artifical* intelligence :-)
+function mapToMatch(number: number): string {
+  // Clamp the input number to be within the range of 0 to 12
+  const clampedNumber = Math.max(0, Math.min(12, number));
+
+  // Lerp
+  const percentage = 5 + (clampedNumber / 12) * (99 - 5);
+  return percentage.toFixed(2) + "%";
+}
+
 export default async function Results({ params }: ResultsParams) {
   try {
     const { results } = await params;
@@ -31,7 +41,7 @@ export default async function Results({ params }: ResultsParams) {
     const personalityValuesArray = resultsObject.values;
     const opinions = resultsObject.opinions;
     if (categories.length != personalityValuesArray.length) {
-      throw undefined;
+      throw undefined; // bro....
     }
     // personal work value -> score
     const personalityValues = Object.fromEntries(
@@ -87,7 +97,14 @@ export default async function Results({ params }: ResultsParams) {
           {topDocuments
             .filter((doc) => !!doc)
             .map((doc, i) => {
-              return <CompanySummary key={doc.name} doc={doc} alias={`Company ${ALPHABET[i]}`} topValues={topValues} opinions={opinions}></CompanySummary>
+              return <CompanySummary
+                key={doc.name}
+                doc={doc}
+                alias={`Company ${ALPHABET[i]}`}
+                topValues={topValues}
+                opinions={opinions}
+                match={mapToMatch(calculateRating(doc))}
+              ></CompanySummary>
             })}
         </section>
     );

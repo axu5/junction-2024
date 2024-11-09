@@ -80,7 +80,7 @@ export function QuizComponent({
       };
       router.push(`/${btoa(JSON.stringify(result))}`);
     }
-  }, [router, seenQuestionKeys, tally]);
+  }, [router, seenQuestionKeys, tally, opinions]);
 
   if (isLoading) {
     return (
