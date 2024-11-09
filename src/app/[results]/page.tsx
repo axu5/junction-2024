@@ -4,21 +4,10 @@ import { categories, Categories } from "../job-quiz/types";
 import { WithId } from "mongodb";
 import CompanySummary from "@/app/[results]/company-summary";
 import Link from "next/link";
+import { CompanyDocument } from "./types";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
-};
-
-export type CompanyDocument = {
-  name: string;
-  ratings: { category: Categories; rating: number }[];
-  positiveBusinessOutlookRate: number;
-  ceo: { approval: number };
-  recommendRate: number;
-  rating: number;
-  ratingsEmbedding: number[];
-  descriptionEmbedding: number[];
-  reviewsEmbedding: number[];
 };
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
