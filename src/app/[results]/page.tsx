@@ -38,7 +38,7 @@ export default async function Results({ params }: ResultsParams) {
     const collection = database.collection("companies");
     const cursor = collection.find({}, { projection: { ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } });
     const allDocuments =
-      (await cursor.toArray()) as unknown as CompanyDocument[];
+      (await cursor.toArray()) as unknown as WithId<CompanyDocument>[];
     const calculateRating = (doc: CompanyDocument) => {
       const rating =
         doc.ratings.reduce(
@@ -71,12 +71,9 @@ export default async function Results({ params }: ResultsParams) {
       .map(value => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topDocuments = await Promise.all(sortedPreferences.slice(0, 3).map((doc) => {
-      return collection.findOne<CompanyDocument>(
-        { _id: (doc as unknown as WithId<CompanyDocument>)._id },
-        { projection: { _id: 0, ratingsEmbedding: 0, reviewsEmbedding: 0, descriptionEmbedding: 0 } }
-      )
-    }));
+    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 3).map((obj) => {
+      return { ...obj, _id: undefined };
+    });
 
     await client.close();
 
