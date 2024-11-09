@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Categories, Questions } from "./page";
 import { useRouter } from "next/navigation";
+import { HexagonSharp } from "../hexagon";
 
 type QuizComponentProps = {
   questions: Questions;
@@ -86,8 +87,27 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
 
   if (isLoading) {
     return (
-      <div className="font-staatliches h-[80%] w-full justify-around text-center text-4xl">
+      <div className="h-[80%] w-full justify-around text-center font-staatliches text-4xl">
         Preparing results...
+        <div className="flex h-full flex-col items-center justify-center py-12">
+          <div className="grid grid-cols-2 grid-rows-2 gap-x-[2px]">
+            <HexagonSharp
+              className="motion-preset-blink col-span-2 flex self-center justify-self-center motion-duration-1500"
+              fill="var(--highlight)"
+              fillOpacity={1}
+            />
+            <HexagonSharp
+              className="motion-preset-blink -translate-y-4 motion-duration-1500 motion-delay-1000"
+              fill="var(--highlight)"
+              fillOpacity={1}
+            />
+            <HexagonSharp
+              className="motion-preset-blink -translate-y-4 motion-duration-1500 motion-delay-500"
+              fill="var(--highlight)"
+              fillOpacity={1}
+            />
+          </div>
+        </div>
       </div>
     );
   }
