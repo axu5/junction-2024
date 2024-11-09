@@ -180,7 +180,7 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
         <h1 className="font-staatliches motion-preset-pop text-3xl font-semibold text-foreground">
           What are your preferred industries?
         </h1>
-        <FormControl className="w-full xl:w-1/2">
+        <FormControl className="motion-preset-pop w-full xl:w-1/2">
           <InputLabel>Industries</InputLabel>
           <Select
             multiple
