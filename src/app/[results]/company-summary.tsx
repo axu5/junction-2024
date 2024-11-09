@@ -9,12 +9,12 @@ import { ArrowDownIcon } from "lucide-react";
 import { Benefit } from "@/app/benefits";
 import { Frustration } from "@/app/frustration";
 import { Placeholder } from "@/app/placeholder";
+import { UserProfile } from "@/app/user-profile";
 
 interface Props {
   doc: CompanyDocument;
   alias: string;
-  topValues: string[];
-  opinions: string[];
+  user: UserProfile;
   match: string;
 }
 
@@ -68,7 +68,7 @@ function BulletPoints(props: { bulletPoints: BulletPoints }) {
 }
 
 export default function CompanySummary(props: Props) {
-  const { doc, alias, topValues, opinions, match } = props;
+  const { doc, alias, user, match } = props;
   const [currentAlias, setCurrentAlias] = useState(alias);
   const [bulletPoints, setBulletPoints] = useState<BulletPoints | undefined>(
     undefined,
@@ -89,7 +89,7 @@ export default function CompanySummary(props: Props) {
   return (
     <div className="pb-8">
       <div className="bg-secondary-backdrop flex flex-row items-center justify-between rounded-xl backdrop-blur-sm">
-        <h1 className="px-5 py-8 font-staatliches text-3xl font-semibold text-foreground xl:text-5xl">
+        <h1 className="font-staatliches px-5 py-8 text-3xl font-semibold text-foreground xl:text-5xl">
           {currentAlias}
         </h1>
         <p className="text-xl font-semibold">{match} match</p>
@@ -118,8 +118,7 @@ export default function CompanySummary(props: Props) {
             <RatingsSummary
               document={doc}
               alias={currentAlias}
-              values={topValues}
-              opinions={opinions}
+              user={user}
             ></RatingsSummary>
           </AccordionDetails>
         </Accordion>
@@ -134,8 +133,7 @@ export default function CompanySummary(props: Props) {
             <ProsConsSummary
               document={doc}
               alias={currentAlias}
-              values={topValues}
-              opinions={opinions}
+              user={user}
               bulletPointsCallback={onBulletPointsCreated}
             ></ProsConsSummary>
           </AccordionDetails>

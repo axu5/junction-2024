@@ -4,6 +4,7 @@ import { CompanyDocument } from "@/app/[results]/types";
 import { useEffect, useState } from "react";
 import { BulletPoints } from "@/app/[results]/company-summary";
 import { Placeholder } from "@/app/placeholder";
+import { UserProfile } from "@/app/user-profile";
 
 type Content = {
   pros: string[];
@@ -13,13 +14,12 @@ type Content = {
 interface Props {
   alias: string;
   document: CompanyDocument;
-  values: string[];
-  opinions: string[];
+  user: UserProfile;
   bulletPointsCallback: (bulletPoints: BulletPoints) => void;
 }
 
 export default function ProsConsSummary(props: Props) {
-  const { alias, document, values, opinions, bulletPointsCallback } = props;
+  const { alias, document, user, bulletPointsCallback } = props;
   const [content, setContent] = useState<Content | string | undefined>(
     undefined,
   );
@@ -36,7 +36,7 @@ export default function ProsConsSummary(props: Props) {
       try {
         res = await fetch("/api/pros-cons-summary", {
           method: "POST",
-          body: JSON.stringify({ alias, document, values, opinions }),
+          body: JSON.stringify({ alias, document, user }),
           signal: controller.signal,
         });
       } catch (e) {
@@ -94,7 +94,14 @@ export default function ProsConsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, alias, content, generatedWithAlias, opinions]);
+  }, [
+    document,
+    user,
+    alias,
+    content,
+    generatedWithAlias,
+    bulletPointsCallback,
+  ]);
 
   if (content === undefined) {
     return <Placeholder></Placeholder>;

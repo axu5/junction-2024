@@ -1,6 +1,9 @@
-export async function readChatStream(response: Response, onChunk: (chunk: string) => void) {
+export async function readChatStream(
+  response: Response,
+  onChunk: (chunk: string) => void,
+) {
   if (response.body === null) {
-    console.error('readChatStream was given a response with a body of null!');
+    console.error("readChatStream was given a response with a body of null!");
     return;
   }
 
@@ -14,7 +17,7 @@ export async function readChatStream(response: Response, onChunk: (chunk: string
 
     const text = decoder.decode(result.value);
 
-    const subchunks = text.split(/\r?\n/g).filter(x => !!x);
+    const subchunks = text.split(/\r?\n/g).filter((x) => !!x);
 
     for (const subchunk of subchunks) {
       const json = JSON.parse(subchunk);
