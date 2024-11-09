@@ -1,22 +1,3 @@
-/**
-Overall Stars/5
-
-Work/Life balance/5
-Contract-based role or full-time, permanent position?
-
-Career opportunities/5
-Rapid innovation with constant changes or steady, predictable growth?
-Defined role with clear expectations or evolving role with shifting tasks?
-Focus on depth in a specific skill or variety and flexibility in responsibilities?
-
-Compensation and benefits/5
-wellness programs (fitness, therapy) or lifestyle perks (travel, meals)
-
-Senior management approval/5
-detailed guidance and procedures or freedom to figure things out independently
-Working with established systems or room for experimenting with new approaches? 
- */
-
 import { QuizComponent } from "./components";
 
 export const categories = [
@@ -176,6 +157,12 @@ const questions: Questions = {
     b: "Moderate salary with extensive benefits",
     affects: {},
   },
+  "Detailed guidance and procedures or freedom to figure things out independently?":
+    {
+      a: "Detailed guidance and procedures",
+      b: "Freedom to figure things out independently",
+      affects: {},
+    },
 };
 
 export default async function JobQuiz() {

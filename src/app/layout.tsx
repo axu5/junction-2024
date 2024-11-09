@@ -40,6 +40,10 @@ export default function RootLayout({
           <HexagonGroup className="bottom-5 left-3" />
           <HexagonGroup className="right-1/4 top-16" />
           <HexagonGroup className="bottom-1/3 right-10" />
+          <HexagonGroup className="right-10 top-[156vh]" />
+          <HexagonGroup className="left-10 top-[255vh]" />
+          <HexagonGroup className="right-64 top-[314vh]" />
+          <HexagonGroup className="left-64 top-[347vh]" />
         </main>
       </body>
     </html>
