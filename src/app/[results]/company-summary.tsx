@@ -89,8 +89,11 @@ export default function CompanySummary(props: Props) {
         <BulletPoints bulletPoints={bulletPoints}></BulletPoints>
       )}
       <div className="flex flex-col gap-x-8">
-        <Accordion>
-          <AccordionSummary expandIcon={<ArrowDownIcon />}>
+        <Accordion sx={{ background: "var(--background)" }}>
+          <AccordionSummary
+            expandIcon={<ArrowDownIcon />}
+            className="font-semibold"
+          >
             Summary
           </AccordionSummary>
           <AccordionDetails>
@@ -102,8 +105,11 @@ export default function CompanySummary(props: Props) {
             ></RatingsSummary>
           </AccordionDetails>
         </Accordion>
-        <Accordion>
-          <AccordionSummary expandIcon={<ArrowDownIcon />}>
+        <Accordion sx={{ background: "var(--background)" }}>
+          <AccordionSummary
+            expandIcon={<ArrowDownIcon />}
+            className="font-semibold"
+          >
             Pros & Cons for you
           </AccordionSummary>
           <AccordionDetails>
