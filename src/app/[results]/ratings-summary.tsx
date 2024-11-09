@@ -71,8 +71,8 @@ export default function RatingsSummary(props: Props) {
   }, [document, values, alias, isStreaming, generatedWithAlias]);
 
   if (chatResponse.length === 0) {
-    return <p className="italic">Thinking...</p>
+    return <p className="italic text-white">Thinking...</p>
   }
 
-  return <p>{ chatResponse }{ isStreaming ? "..." : null }</p>
+  return <p className="text-white">{ chatResponse }{ isStreaming ? "..." : null }</p>
 }
