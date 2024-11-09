@@ -50,7 +50,7 @@ export default function Home() {
       <Image
         src={HustleHiveArrowDown}
         alt="Scroll down for more"
-        className="motion-preset-oscillate absolute bottom-10 right-20 w-16 object-cover object-center"
+        className="motion-preset-oscillate absolute bottom-10 right-20 hidden w-16 object-cover object-center xl:block"
       />
 
       <section className="flex h-[50vh] flex-col items-center justify-center gap-y-10">
