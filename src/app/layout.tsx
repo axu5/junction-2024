@@ -16,6 +16,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "HustleHive",
   description: "Discover roles that just feel right.",
+  icons: ["/hustlehive-logo.png"],
 };
 
 export default function RootLayout({
