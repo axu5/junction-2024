@@ -75,5 +75,5 @@ export default function RatingsSummary(props: Props) {
     return <p className="italic text-white">Thinking...</p>
   }
 
-  return <p className="text-white">{ chatResponse }{ isStreaming ? "..." : null }</p>
+  return <p>{ chatResponse }{ isStreaming ? "..." : null }</p>
 }
