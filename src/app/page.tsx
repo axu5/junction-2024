@@ -1,7 +1,10 @@
 import HustleHiveArrowDown from "@/../public/arrow-down.png";
+import HustleHiveHoneyComb from "@/../public/honeycomb.png";
+import HustleHivePhoneDemo from "@/../public/phone-demo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { Benefit } from "./benefits";
+import { HexagonGroup } from "./hexagon";
 
 export default function Home() {
   return (
@@ -50,7 +53,7 @@ export default function Home() {
         className="motion-preset-oscillate absolute bottom-10 right-20 w-16 object-cover object-center"
       />
 
-      <section className="flex h-[75vh] flex-col items-center justify-center gap-y-10">
+      <section className="flex h-[50vh] flex-col items-center justify-center gap-y-10">
         <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
           Aligning your career with your values has a direct impact on your
           overall satisfaction, motivation, and well-being.
@@ -61,7 +64,7 @@ export default function Home() {
           of life.
         </h2>
       </section>
-      <section className="flex h-[75vh] flex-col items-center justify-center gap-y-10">
+      <section className="flex h-[50vh] flex-col items-center justify-center gap-y-10">
         <h2 className="font-staatliches text-2xl text-foreground">
           Let our AI match you with potential employers
         </h2>
@@ -69,7 +72,42 @@ export default function Home() {
           Train it by answering a few questions!
         </h2>
       </section>
-      <section className="flex h-[75vh] flex-col items-center justify-center gap-y-10"></section>
+      <section className="flex flex-col items-center justify-center gap-y-10 xl:flex-row">
+        <div className="flex flex-col gap-y-10">
+          <div className="flex flex-col gap-y-5">
+            <h2 className="font-staatliches text-7xl">Match</h2>
+            <div className="flex flex-row items-center gap-x-3 font-staatliches text-2xl">
+              <Image src={HustleHiveHoneyComb} alt="honey" />
+              <span>With highly relevant jobs selected by ai</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-5">
+            <h2 className="font-staatliches text-7xl">Choose</h2>
+            <div className="flex flex-row items-center gap-x-3 font-staatliches text-2xl">
+              <Image src={HustleHiveHoneyComb} alt="honey" />
+              <span>According to your values</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-y-5">
+            <h2 className="font-staatliches text-7xl">
+              FIND a better job <span className="text-highlight">for you</span>
+            </h2>
+            <div className="flex flex-row items-center gap-x-3 font-staatliches text-2xl">
+              <Image src={HustleHiveHoneyComb} alt="honey" />
+              <span>with companies matched by ai</span>
+            </div>
+          </div>
+        </div>
+        <div className="w-[70%]">
+          <Image
+            src={HustleHivePhoneDemo}
+            alt="demo of product on phone"
+            className="object-cover object-center"
+          />
+        </div>
+      </section>
+      <HexagonGroup className="right-10 top-[156vh]" />
+      <HexagonGroup className="left-10 top-[255vh]" />
     </>
   );
 }
