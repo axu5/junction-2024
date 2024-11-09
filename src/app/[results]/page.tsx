@@ -21,6 +21,8 @@ export type CompanyDocument = {
   reviewsEmbedding: number[];
 };
 
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+
 export default async function Results({ params }: ResultsParams) {
   try {
     const { results } = await params;
@@ -72,7 +74,7 @@ export default async function Results({ params }: ResultsParams) {
       .map(value => value[0]);
     const topValues = sortedValues.slice(0, 3);
 
-    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 3).map((obj) => {
+    const topDocuments: CompanyDocument[] = sortedPreferences.slice(0, 4).map((obj) => {
       return { ...obj, _id: undefined };
     });
 
@@ -83,15 +85,16 @@ export default async function Results({ params }: ResultsParams) {
           <h1 className="font-bold text-4xl mt-6 mb-6">Top results</h1>
           {topDocuments
             .filter((doc) => !!doc)
-            .map((doc) => {
+            .map((doc, i) => {
               return (
                 <div key={doc.name}>
-                  <h1 className="font-semibold text-5xl sticky top-0 bg-background z-10">{doc.name}</h1>
+                  <h1 className="font-semibold text-5xl sticky top-0 bg-background z-10">Company {ALPHABET[i]}</h1>
                   <div className="flex flex-row gap-x-8">
                     <div className="w-1/2">
                       <h2 className="text-2xl sticky top-[3rem] bg-background">Summary</h2>
                       <RatingsSummary
                         document={doc}
+                        alias={`Company ${ALPHABET[i]}`}
                         values={topValues}
                       ></RatingsSummary>
                     </div>
@@ -99,6 +102,7 @@ export default async function Results({ params }: ResultsParams) {
                       <h2 className="text-2xl sticky top-[3rem] bg-background">Pros & Cons</h2>
                       <ProsConsSummary
                         document={doc}
+                        alias={`Company ${ALPHABET[i]}`}
                         values={topValues}
                       ></ProsConsSummary>
                     </div>

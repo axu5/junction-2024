@@ -66,7 +66,7 @@ export function QuizComponent({
 
   if (isLoading) {
     return (
-      <div className="h-[80%] w-full justify-around">Preparing results...</div>
+      <div className="h-[80%] w-full justify-around italic">Preparing results...</div>
     );
   }
 

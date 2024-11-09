@@ -3,7 +3,7 @@ import { chat } from "@/app/api/chat-server";
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { values, document } = await req.json();
+  const { alias, values, document } = await req.json();
 
   return await chat({
     system: `
@@ -43,6 +43,8 @@ Input (starts at --- and ends at ---):
 ---
 ${JSON.stringify(document).slice(0, 10_000)}
 ---
+
+Use ${alias} instead of the company name everywhere.
         `
   });
 }

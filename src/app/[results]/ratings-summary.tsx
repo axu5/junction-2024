@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { readChatStream } from "@/app/chat-client";
 
 interface Props {
+  alias: string,
   document: CompanyDocument,
   values: string[]
 }
 
 export default function RatingsSummary(props: Props) {
-  const { document, values } = props;
+  const { alias, document, values } = props;
   const [chatResponse, setChatResponse] = useState("");
   const [isStreaming, setIsStreaming] = useState(true);
 
@@ -23,7 +24,7 @@ export default function RatingsSummary(props: Props) {
       try {
         res = await fetch('/api/ratings-summary', {
           method: "POST",
-          body: JSON.stringify({ document, values }),
+          body: JSON.stringify({ alias, document, values }),
           signal: controller.signal
         });
       } catch (e) {
@@ -57,7 +58,11 @@ export default function RatingsSummary(props: Props) {
     return () => {
       controller.abort("Effect destroyed");
     };
-  }, [document, values, isStreaming]);
+  }, [document, values, alias, isStreaming]);
 
-  return <p>{ chatResponse }</p>
+  if (chatResponse.length === 0) {
+    return <p className="italic">Thinking...</p>
+  }
+
+  return <p>{ chatResponse }{ isStreaming ? "..." : null }</p>
 }
