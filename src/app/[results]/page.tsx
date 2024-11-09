@@ -1,24 +1,13 @@
 import { client } from "@/db";
 import { notFound } from "next/navigation";
-import { categories, Categories } from "../job-quiz/page";
+import { categories, Categories } from "../job-quiz/types";
 import { WithId } from "mongodb";
 import CompanySummary from "@/app/[results]/company-summary";
 import Link from "next/link";
+import { CompanyDocument } from "./types";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
-};
-
-export type CompanyDocument = {
-  name: string;
-  ratings: { category: Categories; rating: number }[];
-  positiveBusinessOutlookRate: number;
-  ceo: { approval: number };
-  recommendRate: number;
-  rating: number;
-  ratingsEmbedding: number[];
-  descriptionEmbedding: number[];
-  reviewsEmbedding: number[];
 };
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
@@ -99,7 +88,7 @@ export default async function Results({ params }: ResultsParams) {
 
     return (
       <section className="mb-8">
-        <h1 className="font-staatliches mb-6 mt-6 text-4xl font-bold text-foreground">
+        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
           Top results
         </h1>
         <p className="py-6">

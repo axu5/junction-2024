@@ -8,7 +8,9 @@ export function HexagonGroup({ className = "" }: { className?: string }) {
   const hex3 = Math.random();
   const hex3Active = ((hex3 * 1000) | 0) % 3 === 0;
   return (
-    <div className={cn("absolute -z-50 flex flex-col", className)}>
+    <div
+      className={cn("absolute -z-50 flex flex-col overflow-hidden", className)}
+    >
       <div className="grid grid-cols-2 grid-rows-2 gap-x-[2px]">
         <HexagonSharp
           className={cn("col-span-2 flex self-center justify-self-center", {

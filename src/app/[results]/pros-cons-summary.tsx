@@ -1,6 +1,6 @@
 "use client";
 
-import { CompanyDocument } from "@/app/[results]/page";
+import { CompanyDocument } from "@/app/[results]/types";
 import { useEffect, useState } from "react";
 import { BulletPoints } from "@/app/[results]/company-summary";
 import { Placeholder } from "@/app/placeholder";
