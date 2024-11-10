@@ -89,7 +89,7 @@ export default function CompanySummary(props: Props) {
   return (
     <div className="pb-8">
       <div className="bg-secondary-backdrop flex flex-row items-center justify-between rounded-xl backdrop-blur-sm">
-        <h1 className="font-staatliches px-5 py-8 text-3xl font-semibold text-foreground xl:text-5xl">
+        <h1 className="px-5 py-8 font-staatliches text-3xl font-semibold text-foreground xl:text-5xl">
           {currentAlias}
         </h1>
         <p className="text-xl font-semibold">{match} match</p>
