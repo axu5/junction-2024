@@ -43,7 +43,7 @@ export default function Home() {
       </section>
       <Link
         href="/job-quiz"
-        className="sticky top-10 mx-auto flex max-w-2xl flex-row justify-center rounded-full bg-highlight py-5 text-center font-staatliches text-3xl text-foreground"
+        className="sticky top-5 mx-auto flex max-w-2xl translate-y-5 flex-row justify-center rounded-full bg-highlight py-5 text-center font-staatliches text-3xl text-foreground xl:top-10 xl:translate-y-0"
       >
         Get started
       </Link>
@@ -53,7 +53,7 @@ export default function Home() {
         className="motion-preset-oscillate absolute bottom-10 right-20 hidden w-16 object-cover object-center xl:block"
       />
 
-      <section className="flex h-[50vh] flex-col items-center justify-center gap-y-10">
+      <section className="mt-20 flex h-[50vh] flex-col items-center justify-center gap-y-10">
         <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
           Aligning your career with your values has a direct impact on your
           overall satisfaction, motivation, and well-being.
@@ -98,7 +98,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-[70%]">
+        <div className="w-full xl:w-[70%]">
           <Image
             src={HustleHivePhoneDemo}
             alt="demo of product on phone"
