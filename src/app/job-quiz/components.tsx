@@ -130,7 +130,7 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
 
   if (isLoading) {
     return (
-      <div className="font-staatliches h-[80%] w-full justify-around text-center text-4xl">
+      <div className="h-[80%] w-full justify-around text-center font-staatliches text-4xl">
         Preparing results...
         <div className="flex h-full flex-col items-center justify-center py-12">
           <div className="grid grid-cols-2 grid-rows-2 gap-x-[2px]">
@@ -177,7 +177,7 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
   if (stage === "industries") {
     return (
       <>
-        <h1 className="font-staatliches motion-preset-pop text-3xl font-semibold text-foreground">
+        <h1 className="motion-preset-pop font-staatliches text-3xl font-semibold text-foreground">
           What are your preferred industries?
         </h1>
         <FormControl className="motion-preset-pop w-full xl:w-1/2">
@@ -216,22 +216,22 @@ export function QuizComponent({ questions, questionKey }: QuizComponentProps) {
       </span>
       <h1
         key={currentQuestionKey}
-        className="font-staatliches motion-preset-pop text-3xl font-semibold text-foreground"
+        className="motion-preset-pop min-h-[20vh] font-staatliches text-3xl font-semibold text-foreground"
       >
         {currentQuestionKey}
       </h1>
-      <div className="grid h-[80%] w-full grid-cols-2 justify-around gap-x-5">
+      <div className="grid h-[80%] w-full grid-cols-1 justify-around gap-5 xl:grid-cols-2">
         <div
           onClick={handleClick(-1)}
           key={question.a}
-          className="bg-secondary-backdrop flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
+          className="flex h-full min-h-[20vh] w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight bg-secondary-backdrop p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[25%] motion-translate-y-in-[25%] motion-rotate-in-[10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.a}
         </div>
         <div
           onClick={handleClick(1)}
           key={question.b}
-          className="bg-secondary-backdrop flex h-full w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
+          className="flex h-full min-h-[20vh] w-full cursor-pointer flex-col justify-center rounded-lg border border-black border-highlight bg-secondary-backdrop p-10 text-center motion-scale-in-[0.5] motion-translate-x-in-[-25%] motion-translate-y-in-[25%] motion-rotate-in-[-10deg] motion-blur-in-[5px] motion-opacity-in-[0%] motion-duration-[0.35s] motion-duration-[0.53s]/scale motion-duration-[0.53s]/translate motion-duration-[0.63s]/rotate"
         >
           {question.b}
         </div>
