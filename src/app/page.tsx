@@ -14,8 +14,8 @@ export default function Home() {
           <div className="flex flex-col">
             <div className="flex flex-col gap-y-5 py-20 xl:max-w-[60%]">
               <h1 className="font-staatliches text-7xl uppercase text-foreground">
-                Ignore the <span className="text-highlight">buzz</span> with AI
-                powered job search
+                <span className="text-highlight">Buzz</span> past the noise with
+                AI powered job search
               </h1>
               <h2 className="font-staatliches text-3xl uppercase text-foreground">
                 Find a role that lets you{" "}
