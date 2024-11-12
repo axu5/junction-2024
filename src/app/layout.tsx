@@ -1,4 +1,5 @@
 import HustleHiveLogoWithText from "@/../public/hustlehive-logo-text.png";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Image from "next/image";
@@ -41,6 +42,8 @@ export default function RootLayout({
           <HexagonGroup className="right-1/4 top-16" />
           <HexagonGroup className="bottom-1/3 right-10" />
         </main>
+
+        <Analytics />
       </body>
     </html>
   );
