@@ -72,7 +72,7 @@ export default async function Results({ params }: ResultsParams) {
         rating += 0.8;
       }
 
-      return rating / (doc.ratings.length + 5);
+      return Math.cbrt(rating / (doc.ratings.length + 5));
     };
     const sortedPreferences = allDocuments.sort((docA, docB) => {
       return calculateRating(docB) - calculateRating(docA);
