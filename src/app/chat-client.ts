@@ -20,10 +20,14 @@ export async function readChatStream(
     const subchunks = text.split(/\r?\n/g).filter((x) => !!x);
 
     for (const subchunk of subchunks) {
-      const json = JSON.parse(subchunk);
-      const realText = json.choices[0]?.delta?.content || "";
+      try {
+        const json = JSON.parse(subchunk);
+        const realText = json.choices[0]?.delta?.content || "";
 
-      onChunk(realText);
+        onChunk(realText);
+      } catch {
+        console.log("Unable to parse as json\n", subchunk)
+      }
     }
 
     done = result.done;
