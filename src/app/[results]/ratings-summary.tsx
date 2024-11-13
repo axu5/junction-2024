@@ -72,7 +72,17 @@ export default function RatingsSummary(props: Props) {
     void pain();
 
     return () => {
-      controller.abort("Effect destroyed");
+      try {
+        controller.abort("Effect destroyed");
+      } catch (tmp: unknown) {
+        const error = tmp as { name: string };
+        if (error.name === "AbortError") {
+          // aborted gracefully
+          return;
+        } else {
+          throw tmp;
+        }
+      }
     };
   }, [document, user, alias, isStreaming, generatedWithAlias]);
 
