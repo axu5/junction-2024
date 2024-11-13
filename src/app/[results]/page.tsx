@@ -6,6 +6,7 @@ import CompanySummary from "@/app/[results]/company-summary";
 import Link from "next/link";
 import { CompanyDocument } from "./types";
 import { UserProfile } from "@/app/user-profile";
+import { HexagonGroup } from "../hexagon";
 
 type ResultsParams = {
   params: Promise<{ results: string }>;
@@ -99,44 +100,48 @@ export default async function Results({ params }: ResultsParams) {
     };
 
     return (
-      <section className="mb-8">
-        <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
-          Top results
-        </h1>
-        <p className="py-6">
-          Information is retrieved from{" "}
-          <span className="text-highlight">
-            <Link href="https://glassdoor.com" target="_blank">
-              Glassdoor
-            </Link>
-          </span>{" "}
-          and{" "}
-          <span className="text-highlight">
-            <Link href="https://coresignal.com" target="_blank">
-              Coresignal
-            </Link>
-          </span>
-          .
-        </p>
-        {topDocuments
-          .filter((doc) => !!doc)
-          .map((doc, i) => {
-            return (
-              <CompanySummary
-                key={doc.name}
-                doc={doc}
-                alias={`Company ${ALPHABET[i % ALPHABET.length]}`}
-                user={userProfile}
-                match={((calculateRating(doc) * 10000) | 0) / 100 + "%"}
-              ></CompanySummary>
-            );
-          })}
-        <Link href={"/job-quiz"}>
-          <button className="m-4 cursor-pointer rounded-lg bg-highlight p-3 px-4 text-center font-semibold text-foreground">
-            Start over
-          </button>
-        </Link>
-      </section>
+      <>
+        <section className="mb-8">
+          <h1 className="mb-6 mt-6 font-staatliches text-4xl font-bold text-foreground">
+            Top results
+          </h1>
+          <p className="py-6">
+            Information is retrieved from{" "}
+            <span className="text-highlight">
+              <Link href="https://glassdoor.com" target="_blank">
+                Glassdoor
+              </Link>
+            </span>{" "}
+            and{" "}
+            <span className="text-highlight">
+              <Link href="https://coresignal.com" target="_blank">
+                Coresignal
+              </Link>
+            </span>
+            .
+          </p>
+          {topDocuments
+            .filter((doc) => !!doc)
+            .map((doc, i) => {
+              return (
+                <CompanySummary
+                  key={doc.name}
+                  doc={doc}
+                  alias={`Company ${ALPHABET[i % ALPHABET.length]}`}
+                  user={userProfile}
+                  match={((calculateRating(doc) * 10000) | 0) / 100 + "%"}
+                ></CompanySummary>
+              );
+            })}
+          <Link href={"/job-quiz"}>
+            <button className="m-4 cursor-pointer rounded-lg bg-highlight p-3 px-4 text-center font-semibold text-foreground">
+              Start over
+            </button>
+          </Link>
+        </section>
+        <HexagonGroup className="right-10 top-[156vh]" />
+        <HexagonGroup className="left-10 top-[255vh]" />
+      </>
     );
   } catch (e) {
     console.error(e);

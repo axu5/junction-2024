@@ -41,12 +41,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* <Link
-        href="/job-quiz"
-        className="sticky top-5 mx-auto flex max-w-2xl translate-y-5 flex-row justify-center rounded-full bg-highlight py-5 text-center font-staatliches text-3xl text-foreground xl:top-10 xl:translate-y-0"
-      >
-        Get started
-      </Link> */}
       <GetStartedButton />
       <Image
         src={HustleHiveArrowDown}
