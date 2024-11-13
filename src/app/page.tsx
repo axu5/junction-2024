@@ -2,8 +2,8 @@ import HustleHiveArrowDown from "@/../public/arrow-down.png";
 import HustleHiveHoneyComb from "@/../public/honeycomb.png";
 import HustleHivePhoneDemo from "@/../public/phone-demo.png";
 import Image from "next/image";
-import Link from "next/link";
 import { Benefit } from "./benefits";
+import { GetStartedButton } from "./get-started";
 import { HexagonGroup } from "./hexagon";
 
 export default function Home() {
@@ -41,12 +41,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Link
+      {/* <Link
         href="/job-quiz"
         className="sticky top-5 mx-auto flex max-w-2xl translate-y-5 flex-row justify-center rounded-full bg-highlight py-5 text-center font-staatliches text-3xl text-foreground xl:top-10 xl:translate-y-0"
       >
         Get started
-      </Link>
+      </Link> */}
+      <GetStartedButton />
       <Image
         src={HustleHiveArrowDown}
         alt="Scroll down for more"
