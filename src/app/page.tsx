@@ -9,10 +9,10 @@ import { HexagonGroup } from "./hexagon";
 export default function Home() {
   return (
     <>
-      <section className="">
+      <section className="mb-5 xl:mb-0">
         <div className="flex flex-col xl:flex-row">
           <div className="flex flex-col">
-            <div className="flex flex-col gap-y-5 py-20 xl:max-w-[60%]">
+            <div className="flex flex-col gap-y-5 py-20 xl:pr-20">
               <h1 className="font-staatliches text-7xl uppercase text-foreground">
                 <span className="text-highlight">Buzz</span> past the noise with
                 AI powered job search
@@ -48,7 +48,7 @@ export default function Home() {
         className="motion-preset-oscillate absolute bottom-10 right-20 hidden w-16 object-cover object-center xl:block"
       />
 
-      <section className="mt-20 flex h-[50vh] flex-col items-center justify-center gap-y-10">
+      <section className="my-72 flex h-[50vh] flex-col items-center justify-center gap-y-10 xl:my-0">
         <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
           Aligning your career with your values has a direct impact on your
           overall satisfaction, motivation, and well-being.
