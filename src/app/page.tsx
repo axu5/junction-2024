@@ -48,7 +48,7 @@ export default function Home() {
         className="motion-preset-oscillate absolute bottom-10 right-20 hidden w-16 object-cover object-center xl:block"
       />
 
-      <section className="my-72 flex h-[50vh] flex-col items-center justify-center gap-y-10 xl:my-0">
+      <section className="mb-36 mt-56 flex h-[50vh] flex-col items-center justify-center gap-y-10 xl:my-0">
         <h2 className="rounded-xl bg-secondary p-12 font-staatliches text-2xl text-foreground">
           Aligning your career with your values has a direct impact on your
           overall satisfaction, motivation, and well-being.
@@ -60,10 +60,10 @@ export default function Home() {
         </h2>
       </section>
       <section className="flex h-[50vh] flex-col items-center justify-center gap-y-10">
-        <h2 className="font-staatliches text-2xl text-foreground">
+        <h2 className="text-center font-staatliches text-2xl text-foreground">
           Let our AI match you with potential employers
         </h2>
-        <h2 className="font-staatliches text-2xl text-foreground">
+        <h2 className="text-center font-staatliches text-2xl text-foreground">
           Train it by answering a few questions!
         </h2>
       </section>
